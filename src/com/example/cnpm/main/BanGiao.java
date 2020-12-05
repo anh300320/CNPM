@@ -161,7 +161,7 @@ public class BanGiao extends JFrame {
 		
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				System.out.println("Clicked");
 				//frameKhachang.setVisible(true);
 			}
 		});
