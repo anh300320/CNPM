@@ -189,5 +189,41 @@ public class DAO {
         return null;
     }
 
+	public void SQL(String sql){
+		SQLException e1 = null,e2 = null;
+		int count = 0;
+		try {
+			resultSet = statement.executeQuery(sql);
+			//JOptionPane.showMessageDialog(null, "        Querry Excuted!");
+		} catch (SQLException e) {
+			count++;
+			e1 = e;
+			
+		} finally {
+			try {
+				statement.executeUpdate(sql);
+				//JOptionPane.showMessageDialog(null, "        Querry Excuted!");
+			} catch (SQLException e) {
+				count++;
+				e2 = e;
+			}
+		}
+		if (count == 2) {
+			//JOptionPane.showMessageDialog(null, "      Some Error Occured!");
+			e1.printStackTrace();
+			e2.printStackTrace();
+		}
+			
+	}
+	
+	public boolean next() {
+		try {
+			return (resultSet.next());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 }
 
