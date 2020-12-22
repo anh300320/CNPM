@@ -30,7 +30,7 @@ public class DAO {
     private String connectionUrl = "jdbc:mysql://" + hostname + ":3306/" + dbName;
 
     private static final String SQL_GET_ALL ="SELECT * FROM %s";
-    private static final String SQL_INSERT = "INSERT INTO %s VALUES %s";
+    private static final String SQL_INSERT = "INSERT INTO %s %s";
 
     public DAO(){
         try {
@@ -77,24 +77,32 @@ public class DAO {
 
     private <T> String toRecord(Object obj, Class<T> objType) {
         StringBuilder record = new StringBuilder();
+        StringBuilder structure = new StringBuilder();
+        
         record.append("(");
+        structure.append("(");
         Method[] methods = objType.getMethods();
 
         for(Method method : methods){
             String methodName = method.getName();
+            String field;
 
-            if(isGetMethod(methodName)){
+            if(isGetMethod(methodName) && methodName.length() > 3){
                 String returnType = method.getReturnType().getSimpleName();
-
+                field = methodName.replaceFirst("get", "");
                 try {
                     switch (returnType){
                         case "int":
-                            record.append(method.invoke(obj) + ",");
+                        	String value = null;
+                        	int val = (int) method.invoke(obj);
+                        	if(val == -1) value = "NULL"; else value = "" + val;
+                            record.append(value + ",");
                             break;
                         case "String":
                             record.append("'" + method.invoke(obj) + "'" +",");
                             break;
                     }
+                    structure.append(field + ",");
 
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
@@ -105,7 +113,12 @@ public class DAO {
         record.deleteCharAt(record.length() - 1);
         record.append(")");
 
-        return record.toString();
+        structure.deleteCharAt(structure.length() - 1);
+        structure.append(")");
+        
+        structure.append(" VALUES " + record);
+
+        return structure.toString();
     }
 
     private boolean isGetMethod(String method){
@@ -156,7 +169,6 @@ public class DAO {
         Method setMethod = null;
         try {
             if(type.equals("int")) {
-                String setMethodName = toSetMethod(getMethod.getName());
                 setMethod  = obj.getClass().getDeclaredMethod(toSetMethod(getMethod.getName()), int.class);
                 int value = rs.getInt(getField(getMethod.getName()));
                 setMethod.invoke(obj, value);

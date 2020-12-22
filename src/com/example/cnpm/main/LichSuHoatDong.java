@@ -61,9 +61,11 @@ public class LichSuHoatDong extends JFrame
     Vector<String> col = new Vector<>(Arrays.asList(column));
     Vector<HoatDong> data = new Vector<HoatDong>(); 
     
-    data.add(new HoatDong(1, "asdqwe", "10-10-2020", "10-10-20202", 1234, "aweqweqweq"));
-    data.add(new HoatDong(2, "asdqwe", "11-10-2020", "11-10-20202", 122314, "awadqEQEdeqweqweq"));
-    data.add(new HoatDong(3, "QWEQWQWE", "13-10-2020", "13-10-20202", 1222234, "awadasdqweweqweq"));
+    DAO dao = new DAO();
+    
+    List<HoatDong> lsHd = dao.getAll("lshoatdong", HoatDong.class);
+    for(HoatDong hd : lsHd)
+    	data.add(hd);
     
     table = new JTable(data, col);
     table.setBounds(30, 40, 200, 300);

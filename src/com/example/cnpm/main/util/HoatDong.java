@@ -5,22 +5,30 @@ import java.util.Vector;
 public class HoatDong extends Vector<String>
 {
   private int stt;
-  private String tenHd;
-  private String TgBatDau;
-  private String TgKetThuc;
+  private String tenHd = "";
+  private String TgBatDau= "";
+  private String TgKetThuc = "";
   private int maThue;
-  private String mucDich;
+  private String mucDich = "";
   
+  public HoatDong() {
+	  super();
+  }
   
   
   public HoatDong(int stt, String tenHd, String tgBatDau, String tgKetThuc, int maThue, String mucDich)
   {
     super();
+    
     this.stt = stt;
+    if(tenHd != null)
     this.tenHd = tenHd;
+    if(tgBatDau != null)
     TgBatDau = tgBatDau;
+    if(tgKetThuc != null)
     TgKetThuc = tgKetThuc;
     this.maThue = maThue;
+    if(mucDich != null)
     this.mucDich = mucDich;
     initVector();
   }
@@ -54,20 +62,20 @@ public class HoatDong extends Vector<String>
     this.tenHd = tenHd;
     initVector();
   }
-  public String getTgBatDau()
+  public String getTg_BatDau()
   {
     return TgBatDau;
   }
-  public void setTgBatDau(String tgBatDau)
+  public void setTg_BatDau(String tgBatDau)
   {
     TgBatDau = tgBatDau;
     initVector();
   }
-  public String getTgKetThuc()
+  public String getTg_KetThuc()
   {
     return TgKetThuc;
   }
-  public void setTgKetThuc(String tgKetThuc)
+  public void setTg_KetThuc(String tgKetThuc)
   {
     TgKetThuc = tgKetThuc;
     initVector();
