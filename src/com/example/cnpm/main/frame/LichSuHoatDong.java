@@ -1,4 +1,4 @@
-package com.example.cnpm.main;
+package com.example.cnpm.main.frame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -11,11 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import com.example.cnpm.util.HoatDong;
+import com.example.cnpm.main.dao.DAO;
+import com.example.cnpm.main.util.HoatDong;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import javax.swing.JTable;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class LichSuHoatDong extends JFrame
 {
@@ -73,7 +77,13 @@ public class LichSuHoatDong extends JFrame
     contentPane.add(sp, BorderLayout.CENTER);
    
     
-    JButton btnNewButton = new JButton("New button");
+    JButton btnNewButton = new JButton("T\u00ECm ki\u1EBFm");
+    btnNewButton.setVerticalAlignment(SwingConstants.BOTTOM);
+    btnNewButton.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    			
+    	}
+    });
     contentPane.add(btnNewButton, BorderLayout.SOUTH);
     
     contentPane.setVisible(true);

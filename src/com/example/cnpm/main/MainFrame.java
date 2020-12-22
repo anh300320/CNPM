@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.example.cnpm.main.frame.BanGiao;
+import com.example.cnpm.main.frame.BaoCaoHoatDong;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -45,7 +49,7 @@ public class MainFrame extends JFrame {
 		
 		btnHotngChung.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ActivityReport reportFrame = new ActivityReport();
+				BaoCaoHoatDong reportFrame = new BaoCaoHoatDong();
 				reportFrame.setVisible(true);
 			}
 		});
