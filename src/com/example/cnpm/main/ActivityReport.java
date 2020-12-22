@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.example.cnpm.main.util.HoatDong;
-import com.example.cnpm.main.util.TtCaNhan;
+import com.example.cnpm.util.HoatDong;
+import com.example.cnpm.util.TtCaNhan;
 
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;

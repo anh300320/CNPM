@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import com.example.cnpm.main.util.HoatDong;
+import com.example.cnpm.util.HoatDong;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import javax.swing.JTable;

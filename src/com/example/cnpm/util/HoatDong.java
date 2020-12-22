@@ -1,4 +1,4 @@
-package com.example.cnpm.main.util;
+package com.example.cnpm.util;
 
 import java.util.Vector;
 
