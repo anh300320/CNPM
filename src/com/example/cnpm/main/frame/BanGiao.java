@@ -1,4 +1,4 @@
-package com.example.cnpm.main;
+package com.example.cnpm.main.frame;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -22,6 +22,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import com.example.cnpm.main.dao.DAO;
+
 import javax.swing.JTable;
 import javax.swing.JLabel;
 

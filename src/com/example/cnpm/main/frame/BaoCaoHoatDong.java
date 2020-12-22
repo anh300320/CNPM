@@ -1,4 +1,4 @@
-package com.example.cnpm.main;
+package com.example.cnpm.main.frame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -8,8 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.example.cnpm.util.HoatDong;
-import com.example.cnpm.util.TtCaNhan;
+import com.example.cnpm.main.dao.DAO;
+import com.example.cnpm.main.util.HoatDong;
+import com.example.cnpm.main.util.TtCaNhan;
+import com.github.lgooddatepicker.components.DateTimePicker;
 
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
@@ -23,7 +25,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class ActivityReport extends JFrame {
+public class BaoCaoHoatDong extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtTnHotng;
@@ -33,11 +35,11 @@ public class ActivityReport extends JFrame {
 	private JTextField txtaim;
 	private JTextField txtCcQuyTrnh;
 	private JEditorPane editorPane_1;
-	private JEditorPane editorPane_2;
-	private JEditorPane editorPane_3;
 	private JEditorPane editorPane_4;
 	private JEditorPane editorPane_6;
 	private JButton btnTyChnh;
+	private DateTimePicker tgKetThuc;
+	private DateTimePicker tgBatDau;
 
 	/**
 	 * Launch the application.
@@ -46,7 +48,7 @@ public class ActivityReport extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ActivityReport frame = new ActivityReport();
+					BaoCaoHoatDong frame = new BaoCaoHoatDong();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +60,7 @@ public class ActivityReport extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ActivityReport() {
+	public BaoCaoHoatDong() {
 		setTitle("B\u00E1o c\u00E1o ho\u1EA1t \u0111\u1ED9ng t\u1ED5 d\u00E2n ph\u1ED1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 585, 474);
@@ -126,16 +128,6 @@ public class ActivityReport extends JFrame {
 		editorPane_1.setBounds(202, 50, 357, 28);
 		contentPane.add(editorPane_1);
 		
-		editorPane_2 = new JEditorPane();
-		editorPane_2.setFont(new Font("Arial", Font.PLAIN, 13));
-		editorPane_2.setBounds(202, 89, 357, 28);
-		contentPane.add(editorPane_2);
-		
-		editorPane_3 = new JEditorPane();
-		editorPane_3.setFont(new Font("Arial", Font.PLAIN, 13));
-		editorPane_3.setBounds(202, 128, 357, 28);
-		contentPane.add(editorPane_3);
-		
 		editorPane_4 = new JEditorPane();
 		editorPane_4.setFont(new Font("Arial", Font.PLAIN, 13));
 		editorPane_4.setBounds(202, 167, 357, 28);
@@ -157,12 +149,25 @@ public class ActivityReport extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+
+				
 				String tenHoatDong = editorPane.getText();
 				String mucDich = editorPane_1.getText();
-				String tgBatDau = editorPane_2.getText();
-				String tgKetThuc = editorPane_3.getText();
-				HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDau, tgKetThuc, -1, mucDich);
-				dao.create("lshoatdong", hd, HoatDong.class);
+				
+				if(tgBatDau.getDatePicker() == null || tgBatDau.getTimePicker() == null || tgKetThuc.getDatePicker() == null || tgKetThuc.getTimePicker() == null) {
+					// TODO Pop up
+				}
+				
+				String tgBatDauStr = tgBatDau.getDatePicker().getDate().toString() + " " + tgBatDau.getTimePicker().getTime().toString();
+				String tgKetThucStr = tgKetThuc.getDatePicker().getDate().toString() + " " + tgKetThuc.getTimePicker().getTime().toString();
+				
+				HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDauStr, tgKetThucStr, -1, mucDich);
+				dao.create("lshoatdong", hd, HoatDong.class);	
+				
+				dispose();
+				return;
+				
 			}
 		});
 		
@@ -192,5 +197,14 @@ public class ActivityReport extends JFrame {
 		});
 		btnTyChnh.setBounds(244, 327, 102, 28);
 		contentPane.add(btnTyChnh);
+		
+		tgBatDau = new DateTimePicker();
+		tgBatDau.setBounds(202, 89, 357, 28);
+		contentPane.add(tgBatDau);
+		
+		tgKetThuc = new DateTimePicker();
+		tgKetThuc.setBounds(202, 128, 357, 28);
+		contentPane.add(tgKetThuc);
+		
 	}
 }

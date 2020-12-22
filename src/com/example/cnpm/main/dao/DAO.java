@@ -1,4 +1,4 @@
-package com.example.cnpm.main;
+package com.example.cnpm.main.dao;
 
 
 import com.mysql.cj.jdbc.ConnectionImpl;
