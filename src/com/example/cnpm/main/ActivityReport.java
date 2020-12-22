@@ -8,7 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.example.cnpm.main.util.TtCaNhan;
+import com.example.cnpm.util.HoatDong;
+import com.example.cnpm.util.TtCaNhan;
 
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
@@ -149,6 +150,21 @@ public class ActivityReport extends JFrame {
 		JButton btnNewButton = new JButton("Ho\u00E0n t\u1EA5t");
 		btnNewButton.setBounds(377, 382, 182, 42);
 		contentPane.add(btnNewButton);
+		
+		DAO dao = new DAO();
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String tenHoatDong = editorPane.getText();
+				String mucDich = editorPane_1.getText();
+				String tgBatDau = editorPane_2.getText();
+				String tgKetThuc = editorPane_3.getText();
+				HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDau, tgKetThuc, -1, mucDich);
+				dao.create("lshoatdong", hd, HoatDong.class);
+			}
+		});
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Bi\u00EAn b\u1EA3n b\u00E0n giao c\u01A1 s\u1EDF v\u1EADt ch\u1EA5t");
 		chckbxNewCheckBox.setFont(fn);
