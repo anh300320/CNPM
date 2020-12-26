@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -40,6 +41,8 @@ public class BaoCaoHoatDong extends JFrame {
 	private JButton btnTyChnh;
 	private DateTimePicker tgKetThuc;
 	private DateTimePicker tgBatDau;
+	
+	private BanGiao banGiao;
 
 	/**
 	 * Launch the application.
@@ -146,24 +149,37 @@ public class BaoCaoHoatDong extends JFrame {
 		DAO dao = new DAO();
 		
 		btnNewButton.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-
 				
 				String tenHoatDong = editorPane.getText();
 				String mucDich = editorPane_1.getText();
 				
-				if(tgBatDau.getDatePicker() == null || tgBatDau.getTimePicker() == null || tgKetThuc.getDatePicker() == null || tgKetThuc.getTimePicker() == null) {
-					// TODO Pop up
+				if(tgBatDau.getDatePicker().getDate() == null || tgBatDau.getTimePicker().getTime() == null || tgKetThuc.getDatePicker().getDate() == null || tgKetThuc.getTimePicker().getTime() == null) {
+					JFrame popUp = new PopUp("nhap thoi gian");
+					popUp.setVisible(true);
+					return;
 				}
+				
 				
 				String tgBatDauStr = tgBatDau.getDatePicker().getDate().toString() + " " + tgBatDau.getTimePicker().getTime().toString();
 				String tgKetThucStr = tgKetThuc.getDatePicker().getDate().toString() + " " + tgKetThuc.getTimePicker().getTime().toString();
 				
 				HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDauStr, tgKetThucStr, -1, mucDich);
 				dao.create("lshoatdong", hd, HoatDong.class);	
+				
+				if(banGiao != null /*Nguoi Dang Ky*/) {
+					// Update database
+					int cmnd = 0;
+					try {
+						dao.update(String.format("INSERT INTO thue_nhavanhoa(cmnd) VALUES %d", cmnd));
+					} catch (SQLException e1) {
+						
+						JFrame popUp1 = new PopUp("Lỗi: không thể lưu vào hệ cơ sở dữ liệu");
+						popUp1.setVisible(true);
+						e1.printStackTrace();
+					}
+				}
 				
 				dispose();
 				return;
@@ -176,12 +192,12 @@ public class BaoCaoHoatDong extends JFrame {
 		chckbxNewCheckBox.setBounds(10, 323, 224, 35);
 		contentPane.add(chckbxNewCheckBox);
 		chckbxNewCheckBox.addActionListener(new ActionListener() {    
-      @Override
-      public void actionPerformed(ActionEvent arg0)
-      {
-        btnTyChnh.setVisible(!btnTyChnh.isVisible());
-      }
-    });
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				btnTyChnh.setVisible(!btnTyChnh.isVisible());
+			}
+		});
 		
 		btnTyChnh = new JButton("T\u00F9y ch\u1EC9nh");
 		btnTyChnh.setVisible(false);
