@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.example.cnpm.main.frame.BanGiao;
 import com.example.cnpm.main.frame.BaoCaoHoatDong;
 
 import javax.swing.JButton;
@@ -42,8 +41,7 @@ public class MainFrame extends JFrame {
 	private void onListener() {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BanGiao bangiaoFrame = new BanGiao();
-				bangiaoFrame.setVisible(true);
+				
 			}
 		});
 		

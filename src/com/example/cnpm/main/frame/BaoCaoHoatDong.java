@@ -26,6 +26,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class BaoCaoHoatDong extends JFrame {
+	
+	ChonKhachHang chonKhachHang;
 
 	private JPanel contentPane;
 	private JTextField txtTnHotng;
@@ -61,6 +63,11 @@ public class BaoCaoHoatDong extends JFrame {
 	 * Create the frame.
 	 */
 	public BaoCaoHoatDong() {
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		chonKhachHang = new ChonKhachHang();
+		
 		setTitle("B\u00E1o c\u00E1o ho\u1EA1t \u0111\u1ED9ng t\u1ED5 d\u00E2n ph\u1ED1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 585, 474);
@@ -168,6 +175,7 @@ public class BaoCaoHoatDong extends JFrame {
 				dispose();
 				return;
 				
+				
 			}
 		});
 		
@@ -193,6 +201,8 @@ public class BaoCaoHoatDong extends JFrame {
 				List<TtCaNhan> listTtCaNhan = dao.getAll("tt_canhan", TtCaNhan.class);
 				
 				System.out.println(listTtCaNhan.get(0).getHoTen());
+				
+				chonKhachHang.setVisible(true);
 			}
 		});
 		btnTyChnh.setBounds(244, 327, 102, 28);
