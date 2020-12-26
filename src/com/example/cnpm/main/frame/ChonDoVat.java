@@ -22,17 +22,21 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-
-import com.example.cnpm.main.dao.DAO;
-
 import javax.swing.JTable;
 import javax.swing.JLabel;
 
+import com.example.cnpm.main.dao.DAO;
 
-public class BanGiao extends JFrame {
-	
+
+public class ChonDoVat extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
 	//private TT_Khachang frameKhachang = new TT_Khachang();
+	
+	private BaoCaoHoatDong baoCaoHoatDong;
 
 	private Vector<String> loaiVt = new Vector<String>();
 	private Vector<String> maloaiVt = new Vector<String>();
@@ -48,21 +52,17 @@ public class BanGiao extends JFrame {
 		);
 	
 	int stt = 1;
-	private JTextField textField_2;
-	private JTextField txtThngTinNgi;
 	private JTextField txtLoi;
 	private JTextField txtMLoi;
 	private JTextField txtSLngThu;
 	private JComboBox comboBox_1;
-	private JButton button_2;
 	private JComboBox comboBox;
 	private JButton button;
 	private JTable table;
 	private JButton button_1;
 	private JEditorPane editorPane_3;
-	private JEditorPane editorPane;
-	private JEditorPane editorPane_2;
 	private JLabel newLabel;
+	private JButton btnLuVThot;
 
 	/**
 	 * Launch the application.
@@ -77,7 +77,7 @@ public class BanGiao extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String dovat = loaiVt.get(comboBox.getSelectedIndex());
-				dao.SQL("SELECT maloai FROM dovat WHERE loai LIKE N'" + dovat + "'");
+				dao.SQL("SELECT maloai FROM dovat WHERE tenloai LIKE N'" + dovat + "'");
 				maloaiVt.clear();
 				while(dao.next()) {
 					maloaiVt.add(dao.getColumn("maloai"));	
@@ -108,7 +108,7 @@ public class BanGiao extends JFrame {
 					String soluong = editorPane_3.getText();
 					int i = Integer.parseInt(soluong);
 					if (i <= 0) throw new NumberFormatException();
-					dao.SQL("SELECT loai,donvi,soluong,hientrang FROM dovat WHERE maloai = '" + maloai + "'");	
+					dao.SQL("SELECT tenloai,donvi,soluongtoida,trangthai FROM dovat WHERE maloai = '" + maloai + "'");	
 					dao.next();
 					if (!isExist(maloai, i, dao)) {
 						
@@ -116,10 +116,10 @@ public class BanGiao extends JFrame {
 						rowVt.add(new String[] {
 								"" + (index + 1), 
 								maloai,
-								dao.getColumn("loai"),
+								dao.getColumn("tenloai"),
 								dao.getColumn("donvi"),
 								soluong,
-								dao.getColumn("hientrang")
+								dao.getColumn("trangthai")
 						});
 						tableMode.addRow(rowVt.lastElement());
 					}
@@ -162,10 +162,9 @@ public class BanGiao extends JFrame {
 			}
 		});
 		
-		button_2.addActionListener(new ActionListener() {
+		btnLuVThot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Clicked");
-				//frameKhachang.setVisible(true);
+				dispose();
 			}
 		});
 		
@@ -219,7 +218,7 @@ public class BanGiao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BanGiao frame = new BanGiao();
+					ChonDoVat frame = new ChonDoVat();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -228,20 +227,21 @@ public class BanGiao extends JFrame {
 		});
 	}
 
+	
+	
 	/**
 	 * Create the frame.
 	 */
-	public BanGiao() {
+	public ChonDoVat() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 804, 666);
+		setBounds(100, 100, 802, 699);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		Font fn = new Font("Arial",Font.PLAIN,13);
-		contentPane.setLayout(null);
-		
+		contentPane.setLayout(null);	
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 466, 774, 163);
+		scrollPane.setBounds(10, 466, 768, 186);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -249,24 +249,24 @@ public class BanGiao extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		button = new JButton("Th\u00EAm");
-		button.setBounds(189, 427, 174, 29);
+		button.setBounds(94, 427, 134, 29);
 		contentPane.add(button);
 		
 		button_1 = new JButton("Xo\u00E1");
-		button_1.setBounds(446, 427, 175, 29);
+		button_1.setBounds(322, 427, 134, 29);
 		contentPane.add(button_1);
 		
 		
-		dao.SQL("SELECT DISTINCT loai FROM dovat");
+		dao.SQL("SELECT DISTINCT tenloai FROM dovat");
 		while(dao.next()) {
-			loaiVt.add(dao.getColumn("loai"));
+			loaiVt.add(dao.getColumn("tenloai"));
 			
 		}
 		comboBox = new JComboBox();
 		comboBox.setToolTipText("");
 		comboBox.setName("");
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 13));
-		comboBox.setBounds(60, 76, 100, 35);
+		comboBox.setBounds(60, 38, 100, 35);
 		comboBox.setModel(new DefaultComboBoxModel(loaiVt));
 		contentPane.add(comboBox);
 		
@@ -274,41 +274,12 @@ public class BanGiao extends JFrame {
 		comboBox_1.setToolTipText("");
 		comboBox_1.setName("");
 		comboBox_1.setFont(new Font("Arial", Font.PLAIN, 13));
-		comboBox_1.setBounds(253, 76, 77, 35);
+		comboBox_1.setBounds(288, 38, 77, 35);
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"BAN01"}));
 		contentPane.add(comboBox_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setText("M\u1EE5c \u0111\u00EDch s\u1EED d\u1EE5ng nh\u00E0 v\u0103n ho\u00E1");
-		textField_2.setFont(new Font("Arial", Font.PLAIN, 13));
-		textField_2.setColumns(10);
-		textField_2.setBackground(SystemColor.menu);
-		textField_2.setBounds(10, 20, 222, 35);
-		contentPane.add(textField_2);
-		
-		txtThngTinNgi = new JTextField();
-		txtThngTinNgi.setEditable(false);
-		txtThngTinNgi.setText("  Th\u00F4ng tin ng\u01B0\u1EDDi thu\u00EA");
-		txtThngTinNgi.setFont(new Font("Arial", Font.PLAIN, 13));
-		txtThngTinNgi.setColumns(10);
-		txtThngTinNgi.setBackground(SystemColor.menu);
-		txtThngTinNgi.setBounds(527, 76, 147, 35);
-		contentPane.add(txtThngTinNgi);
-		
-		button_2 = new JButton("Tu\u1EF3 ch\u1EC9nh");
-		
-		button_2.setBounds(684, 76, 102, 35);
-		button_2.setFont(fn);
-		contentPane.add(button_2);
-		
-		editorPane_2 = new JEditorPane();
-		editorPane_2.setEditable(false);
-		editorPane_2.setBounds(526, 124, 258, 150);
-		contentPane.add(editorPane_2);
-		
 		editorPane_3 = new JEditorPane();
-		editorPane_3.setBounds(446, 76, 40, 35);
+		editorPane_3.setBounds(539, 38, 40, 35);
 		contentPane.add(editorPane_3);
 		
 		txtLoi = new JTextField();
@@ -317,7 +288,7 @@ public class BanGiao extends JFrame {
 		txtLoi.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtLoi.setColumns(10);
 		txtLoi.setBackground(SystemColor.menu);
-		txtLoi.setBounds(10, 76, 40, 35);
+		txtLoi.setBounds(10, 38, 40, 35);
 		contentPane.add(txtLoi);
 		
 		txtMLoi = new JTextField();
@@ -326,7 +297,7 @@ public class BanGiao extends JFrame {
 		txtMLoi.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtMLoi.setColumns(10);
 		txtMLoi.setBackground(SystemColor.menu);
-		txtMLoi.setBounds(170, 76, 60, 35);
+		txtMLoi.setBounds(218, 38, 60, 35);
 		contentPane.add(txtMLoi);
 		
 		txtSLngThu = new JTextField();
@@ -335,16 +306,17 @@ public class BanGiao extends JFrame {
 		txtSLngThu.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtSLngThu.setColumns(10);
 		txtSLngThu.setBackground(SystemColor.menu);
-		txtSLngThu.setBounds(340, 76, 96, 35);
+		txtSLngThu.setBounds(433, 38, 96, 35);
 		contentPane.add(txtSLngThu);
 		
-		editorPane = new JEditorPane();
-		editorPane.setBounds(263, 20, 521, 35);
-		contentPane.add(editorPane);
-		
 		newLabel = new JLabel("");
-		newLabel.setBounds(10, 121, 475, 285);
+		newLabel.setBounds(10, 71, 475, 285);
 		contentPane.add(newLabel);
+		
+		btnLuVThot = new JButton("L\u01B0u v\u00E0 Tho\u00E1t");
+		
+		btnLuVThot.setBounds(555, 427, 174, 29);
+		contentPane.add(btnLuVThot);
 		String img_name = comboBox_1.getItemAt(0).toString().substring(0,3) + ".png";
 		createImage(img_name);
 		
@@ -360,7 +332,7 @@ public class BanGiao extends JFrame {
 	}
 	
 	private boolean isExist(String maloai, int number, DAO dao) {
-		int soluong = Integer.parseInt(dao.getColumn("soluong"));
+		int soluong = Integer.parseInt(dao.getColumn("soluongtoida"));
 		if (number > soluong ) throw new NullPointerException();
 		int size = rowVt.size();
 		for (int i = 0; i < size; i++) {
@@ -380,5 +352,13 @@ public class BanGiao extends JFrame {
 			
 		}
 		return false;
+	}
+
+	public BaoCaoHoatDong getBaoCaoHoatDong() {
+		return baoCaoHoatDong;
+	}
+
+	public void setBaoCaoHoatDong(BaoCaoHoatDong baoCaoHoatDong) {
+		this.baoCaoHoatDong = baoCaoHoatDong;
 	}
 }

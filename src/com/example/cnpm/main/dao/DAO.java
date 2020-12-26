@@ -26,7 +26,7 @@ public class DAO {
     private String hostname = "localhost";
     private String username = "root";
     private String password = "";
-    private String dbName = "mysql_db";
+    private String dbName = "cnpm";
     private String connectionUrl = "jdbc:mysql://" + hostname + ":3306/" + dbName;
 
     private static final String SQL_GET_ALL ="SELECT * FROM %s";
