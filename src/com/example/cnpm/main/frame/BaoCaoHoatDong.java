@@ -216,15 +216,17 @@ public class BaoCaoHoatDong extends JFrame {
 		
 		HoatDong hd = new HoatDong(-1, tenHoatDong, tgBatDauStr, tgKetThucStr, mucDich);
 		dao.create("lshoatdong", hd, HoatDong.class);	
-		dao.SQL(String.format("SELECT FROM lshoatdong WHERE tenhoatdong = %s and tg_batdau = %s and tg_ketthuc = %s", tenHoatDong, tgBatDauStr, tgKetThucStr));
-		int maHoatDong = Integer.parseInt(dao.getColumn("mahoatdong"));
+		dao.SQL(String.format("SELECT * FROM lshoatdong WHERE tenhd = \'%s\' and tg_batdau = \'%s\' and tg_ketthuc = \'%s\'", tenHoatDong, tgBatDauStr, tgKetThucStr));
+		int maHoatDong = -1;
+		while(dao.next()) {
+			maHoatDong = Integer.parseInt(dao.getColumn("stt"));
+		}
 		
 		if(chonDoVat != null && chonKhachHang != null) {
 			// Update database
 			ThueNhaVanHoa thueNhaVanHoa = new ThueNhaVanHoa(chonKhachHang.getCmnd(), 0, maHoatDong);
 			dao.create("thue_nhavanhoa", thueNhaVanHoa, ThueNhaVanHoa.class);
-			// TODO update in table thongtin_bangiao by ChonDoVat's API
-			dao.create("ls_hoatdong", hd, HoatDong.class);
+			chonDoVat.saveData(maHoatDong);
 		}
 	}
 	
