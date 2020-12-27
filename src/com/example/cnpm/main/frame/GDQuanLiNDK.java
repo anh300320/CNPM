@@ -35,7 +35,7 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
         tableModel = (DefaultTableModel) jTable1.getModel();
         showMem();
         setLocationRelativeTo(null);
-        this.setTitle("Giao diện quản lí thông tin cá nhân ");
+        this.setTitle("Giao diá»‡n quáº£n lÃ­ thÃ´ng tin cÃ¡ nhÃ¢n ");
         
         checkMode(mode);
     }
@@ -66,28 +66,28 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnThem.setText("Thêm");
+        btnThem.setText("ThÃªm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnChinhsua.setText("Chỉnh sửa");
+        btnChinhsua.setText("Chá»‰nh sá»­a");
         btnChinhsua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChinhsuaActionPerformed(evt);
             }
         });
 
-        btnFind.setText("Tìm kiếm");
+        btnFind.setText("TÃ¬m kiáº¿m");
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFindActionPerformed(evt);
             }
         });
 
-        btnHuydk.setText("Hủy ĐK");
+        btnHuydk.setText("Há»§y Ä�K");
         btnHuydk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuydkActionPerformed(evt);
@@ -102,12 +102,12 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Họ và tên","Địa chỉ", "SĐT", "CMND", "Ngày sinh","Giới tính"
+                "Há»� vÃ  tÃªn","Ä�á»‹a chá»‰", "SÄ�T", "CMND", "NgÃ y sinh","Giá»›i tÃ­nh"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnHome.setText("Trang chính");
+        btnHome.setText("Trang chÃ­nh");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -169,7 +169,7 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
             JOptionPane.showMessageDialog(rootPane,"Please choose a line!");
            }
            else if(NList.size()==0){
-                JOptionPane.showMessageDialog(rootPane,"Không có thông tin !");
+                JOptionPane.showMessageDialog(rootPane,"KhÃ´ng cÃ³ thÃ´ng tin !");
            } else{
                 int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete this item?");
                 if(selectedindex >=0){
@@ -188,20 +188,20 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
         // TODO add your handling code here:
             /*  int select = jTable1.getSelectedRow();
             if (select == -1) {
-                JOptionPane.showMessageDialog(rootPane, "Xin vui lÃ²ng chá»�n dÃ²ng cáº§n sá»­a: ");
+                JOptionPane.showMessageDialog(rootPane, "Xin vui lÃƒÂ²ng chÃ¡Â»ï¿½n dÃƒÂ²ng cÃ¡ÂºÂ§n sÃ¡Â»Â­a: ");
             } else {
                  NguoiDangKi ndk= NList.get(select);
                DBContext.UpdateMem(ndk);
                 jTable1.setModel(tableModel);
-              JOptionPane.showMessageDialog(rootPane, "Cáº­p nháº­t xong");
+              JOptionPane.showMessageDialog(rootPane, "CÃ¡ÂºÂ­p nhÃ¡ÂºÂ­t xong");
             }
         */
             selectIndex1 =jTable1.getSelectedRow();
             if(NList.size()==0){
-                JOptionPane.showMessageDialog(rootPane, "Không có thông tin! Vui lòng thêm thông tin!");
+                JOptionPane.showMessageDialog(rootPane, "KhÃ´ng cÃ³ thÃ´ng tin! Vui lÃ²ng thÃªm thÃ´ng tin!");
             }
             else if(selectIndex1 == -1){
-                 JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa: ");
+                 JOptionPane.showMessageDialog(rootPane, "Xin vui lÃ²ng chá»�n dÃ²ng cáº§n sá»­a: ");
             } else{ 
                 if(selectIndex1 >=0){
                     NguoiDangKi ndk= NList.get(selectIndex1);
@@ -297,7 +297,7 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
     private void checkMode(int mode) {
     	if(mode == 0) return;
     	btnChinhsua.setVisible(false);
-    	//btnHome.setVisible(false);
+    	btnHome.setVisible(false);
     	btnHuydk.setVisible(false);
     }
 }
