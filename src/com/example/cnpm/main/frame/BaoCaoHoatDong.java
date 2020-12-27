@@ -47,7 +47,7 @@ public class BaoCaoHoatDong extends JFrame {
 	private DateTimePicker tgBatDau;
 	
 	private ChonDoVat chonDoVat;
-	private ChonKhachHang chonKhachHang;
+	private GDQuanLiNDK chonKhachHang;
 
 	/**
 	 * Launch the application.
@@ -197,7 +197,7 @@ public class BaoCaoHoatDong extends JFrame {
 //				if(chonDoVat == null) chonDoVat = new ChonDoVat();
 //				chonDoVat.setVisible(true);
 				
-				if(chonKhachHang == null) chonKhachHang = new ChonKhachHang();
+				if(chonKhachHang == null) chonKhachHang = new GDQuanLiNDK();
 				chonKhachHang.setVisible(true);
 			}
 		});
@@ -223,17 +223,18 @@ public class BaoCaoHoatDong extends JFrame {
 		String tgBatDauStr = tgBatDau.getDatePicker().getDate().toString() + " " + tgBatDau.getTimePicker().getTime().toString();
 		String tgKetThucStr = tgKetThuc.getDatePicker().getDate().toString() + " " + tgKetThuc.getTimePicker().getTime().toString();
 		
-		HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDauStr, tgKetThucStr, mucDich);
+		HoatDong hd = new HoatDong(-1, tenHoatDong, tgBatDauStr, tgKetThucStr, mucDich);
 		dao.create("lshoatdong", hd, HoatDong.class);	
 		dao.SQL(String.format("SELECT FROM lshoatdong WHERE tenhoatdong = %s and tg_batdau = %s and tg_ketthuc = %s", tenHoatDong, tgBatDauStr, tgKetThucStr));
 		int maHoatDong = Integer.parseInt(dao.getColumn("mahoatdong"));
 		
 		if(chonDoVat != null /*Nguoi Dang Ky*/) {
-			// Update database
-			int cmnd = 0;
-			ThueNhaVanHoa thueNhaVanHoa = new ThueNhaVanHoa(chonKhachHang.getCmnd(), 0, maHoatDong);
-			dao.create("thue_nhavanhoa", thueNhaVanHoa, ThueNhaVanHoa.class);
-
+//			// Update database
+//			int cmnd = 0;
+//			ThueNhaVanHoa thueNhaVanHoa = new ThueNhaVanHoa(chonKhachHang.getCmnd(), 0, maHoatDong);
+//			dao.create("thue_nhavanhoa", thueNhaVanHoa, ThueNhaVanHoa.class);
+//			// TODO update in table thongtin_bangiao by ChonDoVat's API
+//			dao.create("ls_hoatdong", hd, HoatDong.class);
 			
 		}
 	}

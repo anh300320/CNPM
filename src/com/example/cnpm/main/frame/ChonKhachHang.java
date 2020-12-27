@@ -6,10 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.example.cnpm.main.dao.DAO;
+import com.example.cnpm.main.util.TtCaNhan;
+
 import javax.swing.JEditorPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class ChonKhachHang extends JFrame {
@@ -20,6 +26,8 @@ public class ChonKhachHang extends JFrame {
 	
 	private int cmnd;
 	private String ten;
+	
+	List<TtCaNhan> listNguoiDangKi;
 
 	/**
 	 * Launch the application.
@@ -41,6 +49,9 @@ public class ChonKhachHang extends JFrame {
 	 * Create the frame.
 	 */
 	public ChonKhachHang() {
+	  
+	  listNguoiDangKi = new ArrayList<>();
+	  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -80,6 +91,9 @@ public class ChonKhachHang extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		DAO dao = new DAO();
+		listNguoiDangKi = dao.getAll("tt_canhan", TtCaNhan.class);
 	}
 
 	public int getCmnd() {
