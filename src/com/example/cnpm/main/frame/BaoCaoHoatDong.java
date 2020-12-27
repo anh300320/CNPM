@@ -196,8 +196,9 @@ public class BaoCaoHoatDong extends JFrame {
 		btnTyChnh.setVisible(false);
 		btnTyChnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new GDQuanLiNDK().setVisible(true);
-				DAO dao = new DAO();
+				new GDQuanLiNDK(1).setVisible(true);
+				dispose();
+				//DAO dao = new DAO();
 			}
 		});
 		btnTyChnh.setBounds(244, 327, 102, 28);
