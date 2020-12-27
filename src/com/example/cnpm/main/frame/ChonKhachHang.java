@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import com.example.cnpm.main.dao.DAO;
 import com.example.cnpm.main.util.TtCaNhan;
@@ -28,8 +30,10 @@ public class ChonKhachHang extends JFrame {
 	
 	private int cmnd;
 	
-	List<TtCaNhan> listNguoiDangKi;
+	private List<TtCaNhan> listNguoiDangKi;
 	private JTable table;
+	private JButton btnNewButton_1;
+	private JEditorPane editorPane;
 
 	/**
 	 * Launch the application.
@@ -61,14 +65,14 @@ public class ChonKhachHang extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(135, 11, 289, 19);
+		editorPane = new JEditorPane();
+		editorPane.setBounds(69, 11, 263, 19);
 		contentPane.add(editorPane);
 		
 		txtTn = new JTextField();
 		txtTn.setEditable(false);
-		txtTn.setText("Tìm kiếm tên");
-		txtTn.setBounds(10, 11, 115, 19);
+		txtTn.setText("Họ tên");
+		txtTn.setBounds(10, 11, 49, 19);
 		contentPane.add(txtTn);
 		txtTn.setColumns(10);
 		
@@ -101,10 +105,34 @@ public class ChonKhachHang extends JFrame {
 	
 	void initTable() {
 		
+		initTable(listNguoiDangKi);
+		
+		btnNewButton_1 = new JButton("Tìm kiếm");
+		btnNewButton_1.setBounds(342, 11, 82, 23);
+		contentPane.add(btnNewButton_1);
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String tenTimKiem = editorPane.getText();
+				List<TtCaNhan> list = new ArrayList<TtCaNhan>();
+				
+				for(TtCaNhan tt : listNguoiDangKi) {
+					String ten = tt.getHoTen();
+					if(ten.toLowerCase().contains(tenTimKiem.toLowerCase().trim())) list.add(tt);
+				}
+				
+				initTable(list);
+			}
+		});
+	}
+	
+	void initTable(List<TtCaNhan> listCaNhan) {
 		String column[] = {"Số CMND", "Họ tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Địa chỉ"};
 	    Vector<String> col = new Vector<>(Arrays.asList(column));
 		Vector<Vector<String>> data = new Vector<Vector<String>>();
-		for(TtCaNhan tt : listNguoiDangKi) {
+		for(TtCaNhan tt : listCaNhan) {
 			Vector<String> vt = new Vector<String>();
 			vt.add(String.valueOf(tt.getCmnd()));
 			vt.add(tt.getHoTen());
