@@ -62,7 +62,7 @@ public class GDChinhsuaDK extends javax.swing.JFrame implements ActionListener{
 
         jLabel2.setText("Họ và tên :");
 
-        jLabel3.setText("Địa chỉ:");
+        jLabel3.setText("Địa chỉ :");
 
         jLabel4.setText("Số điện thoại :");
 
@@ -93,7 +93,7 @@ public class GDChinhsuaDK extends javax.swing.JFrame implements ActionListener{
         btnMucdich.setText("Giới tính :");
         
         comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ", "Khác"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -189,7 +189,7 @@ public class GDChinhsuaDK extends javax.swing.JFrame implements ActionListener{
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        new GDQuanLiNDK().setVisible(true);
+        new GDQuanLiNDK(0).setVisible(true);
         this.dispose();
     }                                         
 
