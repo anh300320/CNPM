@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.example.cnpm.main.dao.DAO;
 import com.example.cnpm.main.util.HoatDong;
+import com.example.cnpm.main.util.ThueNhaVanHoa;
 import com.example.cnpm.main.util.TtCaNhan;
 import com.example.cnpm.main.frame.*;
 import com.github.lgooddatepicker.components.DateTimePicker;
@@ -23,12 +24,12 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class BaoCaoHoatDong extends JFrame {
-	
-	ChonKhachHang chonKhachHang;
 
 	private JPanel contentPane;
 	private JTextField txtTnHotng;
@@ -37,12 +38,16 @@ public class BaoCaoHoatDong extends JFrame {
 	private JTextField txtThiGianKt;
 	private JTextField txtaim;
 	private JTextField txtCcQuyTrnh;
+	private JEditorPane editorPane;
 	private JEditorPane editorPane_1;
 	private JEditorPane editorPane_4;
 	private JEditorPane editorPane_6;
 	private JButton btnTyChnh;
 	private DateTimePicker tgKetThuc;
 	private DateTimePicker tgBatDau;
+	
+	private ChonDoVat chonDoVat;
+	private ChonKhachHang chonKhachHang;
 
 	/**
 	 * Launch the application.
@@ -65,9 +70,7 @@ public class BaoCaoHoatDong extends JFrame {
 	 */
 	public BaoCaoHoatDong() {
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		chonKhachHang = new ChonKhachHang();
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		setTitle("B\u00E1o c\u00E1o ho\u1EA1t \u0111\u1ED9ng t\u1ED5 d\u00E2n ph\u1ED1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,7 +89,7 @@ public class BaoCaoHoatDong extends JFrame {
 		contentPane.add(txtTnHotng);
 		txtTnHotng.setColumns(10);
 		
-		JEditorPane editorPane = new JEditorPane();
+		editorPane = new JEditorPane();
 		editorPane.setBounds(202, 11, 357, 28);
 		editorPane.setFont(fn);
 		contentPane.add(editorPane);
@@ -151,27 +154,19 @@ public class BaoCaoHoatDong extends JFrame {
 		btnNewButton.setBounds(377, 382, 182, 42);
 		contentPane.add(btnNewButton);
 		
-		DAO dao = new DAO();
 		
 		btnNewButton.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-
-				
-				String tenHoatDong = editorPane.getText();
-				String mucDich = editorPane_1.getText();
-				
-				if(tgBatDau.getDatePicker() == null || tgBatDau.getTimePicker() == null || tgKetThuc.getDatePicker() == null || tgKetThuc.getTimePicker() == null) {
-					// TODO Pop up
+				if(tgBatDau.getDatePicker().getDate() == null || tgBatDau.getTimePicker().getTime() == null || tgKetThuc.getDatePicker().getDate() == null || tgKetThuc.getTimePicker().getTime() == null) {
+					JFrame popUp = new PopUp("nhap thoi gian");
+					popUp.setVisible(true);
+					return;
 				}
 				
-				String tgBatDauStr = tgBatDau.getDatePicker().getDate().toString() + " " + tgBatDau.getTimePicker().getTime().toString();
-				String tgKetThucStr = tgKetThuc.getDatePicker().getDate().toString() + " " + tgKetThuc.getTimePicker().getTime().toString();
 				
-				HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDauStr, tgKetThucStr, -1, mucDich);
-				dao.create("lshoatdong", hd, HoatDong.class);	
+				updateDataBase();
 				
 				dispose();
 				return;
@@ -185,12 +180,12 @@ public class BaoCaoHoatDong extends JFrame {
 		chckbxNewCheckBox.setBounds(10, 323, 224, 35);
 		contentPane.add(chckbxNewCheckBox);
 		chckbxNewCheckBox.addActionListener(new ActionListener() {    
-      @Override
-      public void actionPerformed(ActionEvent arg0)
-      {
-        btnTyChnh.setVisible(!btnTyChnh.isVisible());
-      }
-    });
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				btnTyChnh.setVisible(!btnTyChnh.isVisible());
+			}
+		});
 		
 		btnTyChnh = new JButton("T\u00F9y ch\u1EC9nh");
 		btnTyChnh.setVisible(false);
@@ -198,6 +193,12 @@ public class BaoCaoHoatDong extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				new GDQuanLiNDK().setVisible(true);
 				DAO dao = new DAO();
+				
+//				if(chonDoVat == null) chonDoVat = new ChonDoVat();
+//				chonDoVat.setVisible(true);
+				
+				if(chonKhachHang == null) chonKhachHang = new ChonKhachHang();
+				chonKhachHang.setVisible(true);
 			}
 		});
 		btnTyChnh.setBounds(244, 327, 102, 28);
@@ -211,5 +212,29 @@ public class BaoCaoHoatDong extends JFrame {
 		tgKetThuc.setBounds(202, 128, 357, 28);
 		contentPane.add(tgKetThuc);
 		
+	}
+	
+	private void updateDataBase() {
+		DAO dao = new DAO();
+		
+		String tenHoatDong = editorPane.getText();
+		String mucDich = editorPane_1.getText();
+		
+		String tgBatDauStr = tgBatDau.getDatePicker().getDate().toString() + " " + tgBatDau.getTimePicker().getTime().toString();
+		String tgKetThucStr = tgKetThuc.getDatePicker().getDate().toString() + " " + tgKetThuc.getTimePicker().getTime().toString();
+		
+		HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDauStr, tgKetThucStr, mucDich);
+		dao.create("lshoatdong", hd, HoatDong.class);	
+		dao.SQL(String.format("SELECT FROM lshoatdong WHERE tenhoatdong = %s and tg_batdau = %s and tg_ketthuc = %s", tenHoatDong, tgBatDauStr, tgKetThucStr));
+		int maHoatDong = Integer.parseInt(dao.getColumn("mahoatdong"));
+		
+		if(chonDoVat != null /*Nguoi Dang Ky*/) {
+			// Update database
+			int cmnd = 0;
+			ThueNhaVanHoa thueNhaVanHoa = new ThueNhaVanHoa(chonKhachHang.getCmnd(), 0, maHoatDong);
+			dao.create("thue_nhavanhoa", thueNhaVanHoa, ThueNhaVanHoa.class);
+
+			
+		}
 	}
 }

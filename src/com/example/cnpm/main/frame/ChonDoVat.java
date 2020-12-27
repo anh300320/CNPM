@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JEditorPane;
@@ -26,6 +28,7 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 
 import com.example.cnpm.main.dao.DAO;
+import com.example.cnpm.main.util.DoVat;
 
 
 public class ChonDoVat extends JFrame {
@@ -35,8 +38,6 @@ public class ChonDoVat extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
 	//private TT_Khachang frameKhachang = new TT_Khachang();
-	
-	private BaoCaoHoatDong baoCaoHoatDong;
 
 	private Vector<String> loaiVt = new Vector<String>();
 	private Vector<String> maloaiVt = new Vector<String>();
@@ -63,6 +64,8 @@ public class ChonDoVat extends JFrame {
 	private JEditorPane editorPane_3;
 	private JLabel newLabel;
 	private JButton btnLuVThot;
+	
+	List<DoVat> listDoVat;
 
 	/**
 	 * Launch the application.
@@ -234,7 +237,9 @@ public class ChonDoVat extends JFrame {
 	 */
 	public ChonDoVat() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		listDoVat = new ArrayList<>();
+		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 802, 699);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -352,13 +357,5 @@ public class ChonDoVat extends JFrame {
 			
 		}
 		return false;
-	}
-
-	public BaoCaoHoatDong getBaoCaoHoatDong() {
-		return baoCaoHoatDong;
-	}
-
-	public void setBaoCaoHoatDong(BaoCaoHoatDong baoCaoHoatDong) {
-		this.baoCaoHoatDong = baoCaoHoatDong;
 	}
 }
