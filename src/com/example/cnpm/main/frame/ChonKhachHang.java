@@ -13,12 +13,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ChonKhachHang extends JFrame {
-	
-	String cmnd;
 
+	String cmnd;
+	
 	private JPanel contentPane;
 	private JTextField txtTn;
 	private JTextField txtCmnd;
+	private JEditorPane editorPane_1;
+	
+	String getCmnd() {
+		return cmnd;
+	}
 
 	/**
 	 * Launch the application.
@@ -40,7 +45,7 @@ public class ChonKhachHang extends JFrame {
 	 * Create the frame.
 	 */
 	public ChonKhachHang() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,7 +56,7 @@ public class ChonKhachHang extends JFrame {
 		editorPane.setBounds(227, 56, 107, 19);
 		contentPane.add(editorPane);
 		
-		JEditorPane editorPane_1 = new JEditorPane();
+		editorPane_1 = new JEditorPane();
 		editorPane_1.setBounds(227, 110, 107, 19);
 		contentPane.add(editorPane_1);
 		
