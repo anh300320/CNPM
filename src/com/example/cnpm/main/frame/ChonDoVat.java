@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JEditorPane;
@@ -26,6 +28,8 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 
 import com.example.cnpm.main.dao.DAO;
+import com.example.cnpm.main.util.HoatDong;
+import com.example.cnpm.main.util.ThongTinBanGiaoThue;
 
 
 public class ChonDoVat extends JFrame {
@@ -34,12 +38,12 @@ public class ChonDoVat extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
-	//private TT_Khachang frameKhachang = new TT_Khachang();
 	
-	private BaoCaoHoatDong baoCaoHoatDong;
-
-	private Vector<String> loaiVt = new Vector<String>();
-	private Vector<String> maloaiVt = new Vector<String>();
+	private int thanhTien;
+	private Vector<String> loaiVt;
+	private Vector<String> maloaiVt;
+	
+	ArrayList<ThongTinBanGiaoThue> mainData = new ArrayList<ThongTinBanGiaoThue>();
 	
 	private JPanel contentPane;
 	private Vector<String[]> rowVt = new Vector<String[]>();		// Vector luu du lieu bang 
@@ -47,7 +51,9 @@ public class ChonDoVat extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"STT", "M\u00E3 lo\u1EA1i", "T\u00EAn lo\u1EA1i", "\u0110\u01A1n v\u1ECB", "S\u1ED1 l\u01B0\u1EE3ng", " Hi\u1EC7n tr\u1EA1ng"
+				"STT", 
+				"M\u00E3 lo\u1EA1i", "T\u00EAn lo\u1EA1i", "\u0110\u01A1n v\u1ECB",
+				"S\u1ED1 l\u01B0\u1EE3ng", " Hi\u1EC7n tr\u1EA1ng", "Thành tiền"
 			}
 		);
 	
@@ -99,7 +105,7 @@ public class ChonDoVat extends JFrame {
 			}
 		});
 		
-		button.addActionListener(new ActionListener() {							// N�t th�m 
+		button.addActionListener(new ActionListener() {							// Nút thêm 
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -108,7 +114,7 @@ public class ChonDoVat extends JFrame {
 					String soluong = editorPane_3.getText();
 					int i = Integer.parseInt(soluong);
 					if (i <= 0) throw new NumberFormatException();
-					dao.SQL("SELECT tenloai,donvi,soluongtoida,trangthai FROM dovat WHERE maloai = '" + maloai + "'");	
+					dao.SQL("SELECT tenloai,donvi,soluongtoida,trangthai,dongia FROM dovat WHERE maloai = '" + maloai + "'");	
 					dao.next();
 					if (!isExist(maloai, i, dao)) {
 						
@@ -119,7 +125,8 @@ public class ChonDoVat extends JFrame {
 								dao.getColumn("tenloai"),
 								dao.getColumn("donvi"),
 								soluong,
-								dao.getColumn("trangthai")
+								dao.getColumn("trangthai"),
+								i*Integer.parseInt(dao.getColumn("dongia")) + "",
 						});
 						tableMode.addRow(rowVt.lastElement());
 					}
@@ -164,54 +171,10 @@ public class ChonDoVat extends JFrame {
 		
 		btnLuVThot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				setVisible(false);
 			}
 		});
 		
-		/*frameKhachang.addWindowListener(new WindowListener() {
-
-			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-				//if(frameKhachang.isCompletedInfor()) editorPane_2.setText(frameKhachang.getInfor());
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-			
-			}
-			
-			
-		});*/
 	}
 	
 	public static void main(String[] args) {
@@ -233,8 +196,68 @@ public class ChonDoVat extends JFrame {
 	 * Create the frame.
 	 */
 	public ChonDoVat() {
+		init();
+		onActionListener();
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	void createImage(String img_name) {
+		Image img = new ImageIcon(this.getClass().getResource("/images/"+ img_name)).getImage();
+		ImageIcon icon = new ImageIcon(img);
+		int width = icon.getIconWidth();
+		newLabel.setBounds(10 + (475 - width)/2, 121, 475, 285);
+		newLabel.setIcon(icon);
+	}
+	
+	private boolean isExist(String maloai, int number, DAO dao) {
+		int soluong = Integer.parseInt(dao.getColumn("soluongtoida"));
+		if (number > soluong ) throw new NullPointerException();
+		int size = rowVt.size();
+		for (int i = 0; i < size; i++) {
+			String[] tmp = rowVt.get(i);	
+			if (maloai.equals(tmp[1])) {
+				int sum = Integer.parseInt(tmp[4]) + number;
+				if (sum > soluong) throw new NullPointerException();
+				for (int j = i ; j < size; j++) {
+					tableMode.removeRow(i);
+				}
+				tmp[4] = "" + sum;
+				tmp[6] = "" + sum*Integer.parseInt(dao.getColumn("dongia"));
+				for (int j = i; j < size; j++) {
+					tableMode.addRow(rowVt.get(j));
+				}
+				return true;
+			}
+			
+		}
+		return false;
+	}	
+	
+	public void saveData(int maHoatDong) {
+		mainData.clear();
+		thanhTien = 0;
+		for (String[] s : rowVt) {
+			mainData.add(new ThongTinBanGiaoThue(-1, s[1], Integer.parseInt(s[4]), s[5], "", -1, maHoatDong));
+			thanhTien+= Integer.parseInt(s[6]);
+		}
+		for (ThongTinBanGiaoThue thongtin_bangiao_thue: mainData) {
+			dao.create("thongtin_bangiao_thue", thongtin_bangiao_thue, ThongTinBanGiaoThue.class);
+		}
+	}
+	
+	public ArrayList<ThongTinBanGiaoThue>getThongTinBanGiaoThue() {
+		return mainData;
+	}
+	
+	public int getThanhTien() {
+		return thanhTien;
+	}
+	
+	private void init() {
+		maloaiVt = new Vector<String>();
+		loaiVt = new Vector<String>();
+		setTitle("Ch\u1ECDn \u0111\u1ED3 v\u1EADt");
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 802, 699);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -319,46 +342,5 @@ public class ChonDoVat extends JFrame {
 		contentPane.add(btnLuVThot);
 		String img_name = comboBox_1.getItemAt(0).toString().substring(0,3) + ".png";
 		createImage(img_name);
-		
-		onActionListener();
-		
-	}
-	void createImage(String img_name) {
-		Image img = new ImageIcon(this.getClass().getResource("/images/"+ img_name)).getImage();
-		ImageIcon icon = new ImageIcon(img);
-		int width = icon.getIconWidth();
-		newLabel.setBounds(10 + (475 - width)/2, 121, 475, 285);
-		newLabel.setIcon(icon);
-	}
-	
-	private boolean isExist(String maloai, int number, DAO dao) {
-		int soluong = Integer.parseInt(dao.getColumn("soluongtoida"));
-		if (number > soluong ) throw new NullPointerException();
-		int size = rowVt.size();
-		for (int i = 0; i < size; i++) {
-			String[] tmp = rowVt.get(i);	
-			if (maloai.equals(tmp[1])) {
-				int sum = Integer.parseInt(tmp[4]) + number;
-				if (sum > soluong) throw new NullPointerException();
-				for (int j = i ; j < size; j++) {
-					tableMode.removeRow(i);
-				}
-				tmp[4] = "" + sum;
-				for (int j = i; j < size; j++) {
-					tableMode.addRow(rowVt.get(j));
-				}
-				return true;
-			}
-			
-		}
-		return false;
-	}
-
-	public BaoCaoHoatDong getBaoCaoHoatDong() {
-		return baoCaoHoatDong;
-	}
-
-	public void setBaoCaoHoatDong(BaoCaoHoatDong baoCaoHoatDong) {
-		this.baoCaoHoatDong = baoCaoHoatDong;
 	}
 }

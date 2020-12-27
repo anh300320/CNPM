@@ -23,7 +23,6 @@ public class TTBanGiao extends JFrame {
 	private DAO dao = new DAO();
 	private JPanel contentPane;
 	private JTable table;
-	private JButton btnNewButton;
 	private Vector<String[]> rowVt = new Vector<String[]>();
 	private DefaultTableModel tableModel = new DefaultTableModel(
 			new Object[][] {
@@ -34,11 +33,6 @@ public class TTBanGiao extends JFrame {
 		);
 
 	private void onListener() {
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
 	}
 	
 	private void onCreate(String mabangiao) {
@@ -65,25 +59,21 @@ public class TTBanGiao extends JFrame {
 	}
 	
 	private void init() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 469, 368);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 469, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 53, 452, 270);
+		scrollPane.setFocusable(false);
+		scrollPane.setEnabled(false);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
-		
-		btnNewButton = new JButton("OK");
-		
-		btnNewButton.setBounds(293, 390, 101, 32);
-		contentPane.add(btnNewButton);
 	}
 }

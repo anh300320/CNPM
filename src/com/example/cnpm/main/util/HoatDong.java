@@ -8,7 +8,6 @@ public class HoatDong extends Vector<String>
   private String tenHd = "";
   private String TgBatDau= "";
   private String TgKetThuc = "";
-  private int maThue;
   private String mucDich = "";
   
   public HoatDong() {
@@ -16,7 +15,7 @@ public class HoatDong extends Vector<String>
   }
   
   
-  public HoatDong(int stt, String tenHd, String tgBatDau, String tgKetThuc, int maThue, String mucDich)
+  public HoatDong(int stt, String tenHd, String tgBatDau, String tgKetThuc, String mucDich)
   {
     super();
     
@@ -27,7 +26,6 @@ public class HoatDong extends Vector<String>
     TgBatDau = tgBatDau;
     if(tgKetThuc != null)
     TgKetThuc = tgKetThuc;
-    this.maThue = maThue;
     if(mucDich != null)
     this.mucDich = mucDich;
     initVector();
@@ -40,7 +38,6 @@ public class HoatDong extends Vector<String>
     add(tenHd);
     add(TgKetThuc);
     add(TgBatDau);
-    add(Integer.toString(maThue));
     add(mucDich);
   }
   
@@ -80,15 +77,7 @@ public class HoatDong extends Vector<String>
     TgKetThuc = tgKetThuc;
     initVector();
   }
-  public int getMaThue()
-  {
-    return maThue;
-  }
-  public void setMaThue(int maThue)
-  {
-    this.maThue = maThue;
-    initVector();
-  }
+
   public String getMucDich()
   {
     return mucDich;

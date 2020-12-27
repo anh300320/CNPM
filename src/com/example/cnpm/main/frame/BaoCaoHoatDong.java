@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 public class BaoCaoHoatDong extends JFrame {
 	
 	ChonKhachHang chonKhachHang;
+	ChonDoVat chonDoVat;
 
 	private JPanel contentPane;
 	private JTextField txtTnHotng;
@@ -41,6 +42,7 @@ public class BaoCaoHoatDong extends JFrame {
 	private JEditorPane editorPane_4;
 	private JEditorPane editorPane_6;
 	private JButton btnTyChnh;
+	private JButton btnNewButton_1;
 	private DateTimePicker tgKetThuc;
 	private DateTimePicker tgBatDau;
 
@@ -68,6 +70,7 @@ public class BaoCaoHoatDong extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		chonKhachHang = new ChonKhachHang();
+		chonDoVat = new ChonDoVat();
 		
 		setTitle("B\u00E1o c\u00E1o ho\u1EA1t \u0111\u1ED9ng t\u1ED5 d\u00E2n ph\u1ED1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,8 +173,10 @@ public class BaoCaoHoatDong extends JFrame {
 				String tgBatDauStr = tgBatDau.getDatePicker().getDate().toString() + " " + tgBatDau.getTimePicker().getTime().toString();
 				String tgKetThucStr = tgKetThuc.getDatePicker().getDate().toString() + " " + tgKetThuc.getTimePicker().getTime().toString();
 				
-				HoatDong hd = new HoatDong(0, tenHoatDong, tgBatDauStr, tgKetThucStr, -1, mucDich);
-				dao.create("lshoatdong", hd, HoatDong.class);	
+				HoatDong hd = new HoatDong(10, tenHoatDong, tgBatDauStr, tgKetThucStr, mucDich);
+				dao.create("lshoatdong", hd, HoatDong.class);
+				
+				chonDoVat.saveData(hd.getStt());
 				
 				dispose();
 				return;
@@ -189,15 +194,17 @@ public class BaoCaoHoatDong extends JFrame {
       public void actionPerformed(ActionEvent arg0)
       {
         btnTyChnh.setVisible(!btnTyChnh.isVisible());
+        btnNewButton_1.setVisible(!btnNewButton_1.isVisible());
       }
     });
 		
-		btnTyChnh = new JButton("T\u00F9y ch\u1EC9nh");
+		btnTyChnh = new JButton("Ch\u1EC9nh t\u00EAn");
 		btnTyChnh.setVisible(false);
 		btnTyChnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new GDQuanLiNDK().setVisible(true);
 				DAO dao = new DAO();
+
 			}
 		});
 		btnTyChnh.setBounds(244, 327, 102, 28);
@@ -211,5 +218,19 @@ public class BaoCaoHoatDong extends JFrame {
 		tgKetThuc.setBounds(202, 128, 357, 28);
 		contentPane.add(tgKetThuc);
 		
+		btnNewButton_1 = new JButton("B\u00E0n giao");
+		btnNewButton_1.setVisible(false);
+		btnNewButton_1.setBounds(369, 330, 89, 28);
+		contentPane.add(btnNewButton_1);
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				chonDoVat.setVisible(true);
+				
+			}
+			
+		});
 	}
 }
