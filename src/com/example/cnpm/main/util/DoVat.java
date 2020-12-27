@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class DoVat extends Vector<String>{
 	
-	String maLoai;;
+	String maLoai;
 	String tenLoai;
 	String donVi;
 	String soLuongToiDa;
