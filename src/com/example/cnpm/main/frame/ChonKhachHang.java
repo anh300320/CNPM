@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 
 public class ChonKhachHang extends JFrame {
-
+	
 	private JPanel contentPane;
 	private JTextField txtTn;
 	
@@ -59,6 +59,7 @@ public class ChonKhachHang extends JFrame {
 		listNguoiDangKi = new ArrayList<>();
 	  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

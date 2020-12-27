@@ -43,6 +43,7 @@ public class BaoCaoHoatDong extends JFrame {
 	private JEditorPane editorPane_4;
 	private JEditorPane editorPane_6;
 	private JButton btnTyChnh;
+	private JButton btnNewButton_1;
 	private DateTimePicker tgKetThuc;
 	private DateTimePicker tgBatDau;
 	private JButton btnChonNguoi;
@@ -74,6 +75,7 @@ public class BaoCaoHoatDong extends JFrame {
 	public BaoCaoHoatDong() {
 		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 		
 		setTitle("B\u00E1o c\u00E1o ho\u1EA1t \u0111\u1ED9ng t\u1ED5 d\u00E2n ph\u1ED1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -252,6 +254,7 @@ public class BaoCaoHoatDong extends JFrame {
 				if(chonKhachHang == null) chonKhachHang = new ChonKhachHang();
 				chonKhachHang.setVisible(true);
 			}
+
 		});
 	}
 }

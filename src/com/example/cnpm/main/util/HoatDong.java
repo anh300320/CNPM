@@ -77,7 +77,7 @@ public class HoatDong extends Vector<String>
     TgKetThuc = tgKetThuc;
     initVector();
   }
-  
+
   public String getMucDich()
   {
     return mucDich;
