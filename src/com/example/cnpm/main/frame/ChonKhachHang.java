@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class ChonKhachHang extends JFrame {
 	
@@ -31,9 +32,10 @@ public class ChonKhachHang extends JFrame {
 	private int cmnd;
 	
 	private List<TtCaNhan> listNguoiDangKi;
-	private JTable table;
 	private JButton btnNewButton_1;
 	private JEditorPane editorPane;
+	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -94,6 +96,7 @@ public class ChonKhachHang extends JFrame {
 		listNguoiDangKi = dao.getAll("tt_canhan", TtCaNhan.class);
 		
 		initTable();
+		
 	}
 
 	public int getCmnd() {
@@ -111,6 +114,12 @@ public class ChonKhachHang extends JFrame {
 		btnNewButton_1 = new JButton("Tìm kiếm");
 		btnNewButton_1.setBounds(342, 11, 82, 23);
 		contentPane.add(btnNewButton_1);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 35, 414, 191);
+		contentPane.add(scrollPane);
+
+		scrollPane.setViewportView(table);
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			
@@ -145,7 +154,6 @@ public class ChonKhachHang extends JFrame {
 		}
 		
 		table = new JTable(data, col);
-		table.setBounds(10, 43, 414, 177);
-		contentPane.add(table);
 	}
+	
 }
