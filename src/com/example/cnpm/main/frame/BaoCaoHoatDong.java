@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import com.example.cnpm.main.dao.DAO;
 import com.example.cnpm.main.util.HoatDong;
 import com.example.cnpm.main.util.TtCaNhan;
+import com.example.cnpm.main.frame.*;
 import com.github.lgooddatepicker.components.DateTimePicker;
 
 import javax.swing.JTextField;
@@ -201,14 +202,9 @@ public class BaoCaoHoatDong extends JFrame {
 		btnTyChnh.setVisible(false);
 		btnTyChnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				new GDQuanLiNDK().setVisible(true);
 				DAO dao = new DAO();
-				
-				List<TtCaNhan> listTtCaNhan = dao.getAll("tt_canhan", TtCaNhan.class);
-				
-				System.out.println(listTtCaNhan.get(0).getHoTen());
-				
-				
+
 			}
 		});
 		btnTyChnh.setBounds(244, 327, 102, 28);
