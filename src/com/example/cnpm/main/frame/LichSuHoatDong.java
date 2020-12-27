@@ -55,7 +55,7 @@ public class LichSuHoatDong extends JFrame
   {
     setTitle("L\u1ECBch s\u1EED ho\u1EA1t \u0111\u1ED9ng");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 450, 300);
+    setBounds(100, 100, 542, 404);
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
