@@ -15,19 +15,21 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 public class ChonKhachHang extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtTn;
-	private JTextField txtCmnd;
 	
 	private int cmnd;
-	private String ten;
 	
 	List<TtCaNhan> listNguoiDangKi;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -50,7 +52,7 @@ public class ChonKhachHang extends JFrame {
 	 */
 	public ChonKhachHang() {
 	  
-	  listNguoiDangKi = new ArrayList<>();
+		listNguoiDangKi = new ArrayList<>();
 	  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -60,40 +62,33 @@ public class ChonKhachHang extends JFrame {
 		contentPane.setLayout(null);
 		
 		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(227, 56, 107, 19);
+		editorPane.setBounds(135, 11, 289, 19);
 		contentPane.add(editorPane);
 		
-		JEditorPane editorPane_1 = new JEditorPane();
-		editorPane_1.setBounds(227, 110, 107, 19);
-		contentPane.add(editorPane_1);
-		
 		txtTn = new JTextField();
-		txtTn.setText("T\u00EAn");
-		txtTn.setBounds(53, 56, 96, 19);
+		txtTn.setEditable(false);
+		txtTn.setText("Tìm kiếm tên");
+		txtTn.setBounds(10, 11, 115, 19);
 		contentPane.add(txtTn);
 		txtTn.setColumns(10);
-		
-		txtCmnd = new JTextField();
-		txtCmnd.setText("CMND");
-		txtCmnd.setColumns(10);
-		txtCmnd.setBounds(53, 110, 96, 19);
-		contentPane.add(txtCmnd);
 		
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setCmnd(Integer.parseInt(editorPane_1.getText()));
-				setTen(editorPane.getText());
+				int rowId = table.getSelectedRow();
+				setCmnd(listNguoiDangKi.get(rowId).getCmnd());
 				setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(144, 189, 85, 21);
+		btnNewButton.setBounds(339, 229, 85, 21);
 		contentPane.add(btnNewButton);
 		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		DAO dao = new DAO();
 		listNguoiDangKi = dao.getAll("tt_canhan", TtCaNhan.class);
+		
+		initTable();
 	}
 
 	public int getCmnd() {
@@ -103,12 +98,25 @@ public class ChonKhachHang extends JFrame {
 	public void setCmnd(int cmnd) {
 		this.cmnd = cmnd;
 	}
-
-	public String getTen() {
-		return ten;
-	}
-
-	public void setTen(String ten) {
-		this.ten = ten;
+	
+	void initTable() {
+		
+		String column[] = {"Số CMND", "Họ tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Địa chỉ"};
+	    Vector<String> col = new Vector<>(Arrays.asList(column));
+		Vector<Vector<String>> data = new Vector<Vector<String>>();
+		for(TtCaNhan tt : listNguoiDangKi) {
+			Vector<String> vt = new Vector<String>();
+			vt.add(String.valueOf(tt.getCmnd()));
+			vt.add(tt.getHoTen());
+			vt.add(tt.getNgaySinh());
+			vt.add(tt.getGioiTinh());
+			vt.add(tt.getSdt());
+			vt.add(tt.getDiaChi());
+			data.add(vt);
+		}
+		
+		table = new JTable(data, col);
+		table.setBounds(10, 43, 414, 177);
+		contentPane.add(table);
 	}
 }

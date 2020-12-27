@@ -45,9 +45,12 @@ public class BaoCaoHoatDong extends JFrame {
 	private JButton btnTyChnh;
 	private DateTimePicker tgKetThuc;
 	private DateTimePicker tgBatDau;
+	private JButton btnChonNguoi;
 	
 	private ChonDoVat chonDoVat;
-	private GDQuanLiNDK chonKhachHang;
+	private ChonKhachHang chonKhachHang;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -184,23 +187,10 @@ public class BaoCaoHoatDong extends JFrame {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				btnTyChnh.setVisible(!btnTyChnh.isVisible());
+				btnChonNguoi.setVisible(!btnChonNguoi.isVisible());
 			}
 		});
 		
-		btnTyChnh = new JButton("T\u00F9y ch\u1EC9nh");
-		btnTyChnh.setVisible(false);
-		btnTyChnh.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			  
-//				if(chonDoVat == null) chonDoVat = new ChonDoVat();
-//				chonDoVat.setVisible(true);
-				
-				if(chonKhachHang == null) chonKhachHang = new GDQuanLiNDK(1);
-				chonKhachHang.setVisible(true);
-			}
-		});
-		btnTyChnh.setBounds(244, 327, 102, 28);
-		contentPane.add(btnTyChnh);
 		
 		tgBatDau = new DateTimePicker();
 		tgBatDau.setBounds(202, 89, 357, 28);
@@ -210,6 +200,7 @@ public class BaoCaoHoatDong extends JFrame {
 		tgKetThuc.setBounds(202, 128, 357, 28);
 		contentPane.add(tgKetThuc);
 		
+		initButton();
 	}
 	
 	private void updateDataBase() {
@@ -226,14 +217,41 @@ public class BaoCaoHoatDong extends JFrame {
 		dao.SQL(String.format("SELECT FROM lshoatdong WHERE tenhoatdong = %s and tg_batdau = %s and tg_ketthuc = %s", tenHoatDong, tgBatDauStr, tgKetThucStr));
 		int maHoatDong = Integer.parseInt(dao.getColumn("mahoatdong"));
 		
-		if(chonDoVat != null /*Nguoi Dang Ky*/) {
-//			// Update database
-//			int cmnd = 0;
-//			ThueNhaVanHoa thueNhaVanHoa = new ThueNhaVanHoa(chonKhachHang.getCmnd(), 0, maHoatDong);
-//			dao.create("thue_nhavanhoa", thueNhaVanHoa, ThueNhaVanHoa.class);
-//			// TODO update in table thongtin_bangiao by ChonDoVat's API
-//			dao.create("ls_hoatdong", hd, HoatDong.class);
-			
+		if(chonDoVat != null && chonKhachHang != null) {
+			// Update database
+			ThueNhaVanHoa thueNhaVanHoa = new ThueNhaVanHoa(chonKhachHang.getCmnd(), 0, maHoatDong);
+			dao.create("thue_nhavanhoa", thueNhaVanHoa, ThueNhaVanHoa.class);
+			// TODO update in table thongtin_bangiao by ChonDoVat's API
+			dao.create("ls_hoatdong", hd, HoatDong.class);
 		}
+	}
+	
+	private void initButton() {
+		
+		btnTyChnh = new JButton("Cơ sở vật chất");
+		btnTyChnh.setVisible(false);
+		btnTyChnh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			  
+				if(chonDoVat == null) chonDoVat = new ChonDoVat();
+				chonDoVat.setVisible(true);
+			}
+		});
+		btnTyChnh.setBounds(244, 327, 152, 28);
+		contentPane.add(btnTyChnh);
+		
+		btnChonNguoi = new JButton("Chọn người thuê");
+		btnChonNguoi.setBounds(406, 327, 153, 28);
+		btnChonNguoi.setVisible(false);
+		contentPane.add(btnChonNguoi);
+		
+		btnChonNguoi.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(chonKhachHang == null) chonKhachHang = new ChonKhachHang();
+				chonKhachHang.setVisible(true);
+			}
+		});
 	}
 }
