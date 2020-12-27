@@ -13,12 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ChonKhachHang extends JFrame {
-	
-	String cmnd;
 
 	private JPanel contentPane;
 	private JTextField txtTn;
 	private JTextField txtCmnd;
+	
+	private int cmnd;
+	private String ten;
 
 	/**
 	 * Launch the application.
@@ -70,10 +71,30 @@ public class ChonKhachHang extends JFrame {
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cmnd = editorPane.getText();
+				setCmnd(Integer.parseInt(editorPane_1.getText()));
+				setTen(editorPane.getText());
+				setVisible(false);
 			}
 		});
 		btnNewButton.setBounds(144, 189, 85, 21);
 		contentPane.add(btnNewButton);
+		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
+
+	public int getCmnd() {
+		return cmnd;
+	}
+
+	public void setCmnd(int cmnd) {
+		this.cmnd = cmnd;
+	}
+
+	public String getTen() {
+		return ten;
+	}
+
+	public void setTen(String ten) {
+		this.ten = ten;
 	}
 }
