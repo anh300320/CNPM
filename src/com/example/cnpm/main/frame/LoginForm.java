@@ -1,12 +1,18 @@
 package com.example.cnpm.main.frame;
 
 import javax.swing.JOptionPane;
+
+import com.example.cnpm.main.MainFrame;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class LoginForm extends javax.swing.JFrame {
+	
+	private boolean success = false;
+	
 	public LoginForm() {
         initComponents();
     }
@@ -123,19 +129,19 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //Thông báo nếu Username trống
+        //ThÃ´ng bÃ¡o náº¿u Username trá»‘ng
         if(jTextField1.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Vui lòng điền Username!");
+            JOptionPane.showMessageDialog(this, "Vui lÃ²ng Ä‘iá»�n Username!");
         }
         
-        //Thông báo nếu Password trống
+        //ThÃ´ng bÃ¡o náº¿u Password trá»‘ng
         else if(jPasswordField1.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Vui lòng điền Password!");
+            JOptionPane.showMessageDialog(this, "Vui lÃ²ng Ä‘iá»�n Password!");
         }
         else {
             try{
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysqldb", "root", "");
-                String sql = "select * from login where USER_NAME=? and PASSWORD=?";
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cnpm", "root", "");
+                String sql = "select * from taikhoan where tentk=? and mk=?";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, jTextField1.getText());
                 ps.setString(2, jPasswordField1.getText());
@@ -143,9 +149,10 @@ public class LoginForm extends javax.swing.JFrame {
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
                     JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
-                    MenuForm menu = new MenuForm();
-                    menu.setVisible(true);
-                    setVisible(false);
+                    String taiKhoan = jTextField1.getText();
+                    MainFrame main = new MainFrame(taiKhoan);
+                    main.setVisible(true);
+                    dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(this, "Đăng nhập thất bại!");
@@ -187,12 +194,21 @@ public class LoginForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                LoginForm login = new LoginForm();
+                login.setVisible(true);
             }
         });
     }
 
-    // Variables declaration - do not modify                     
+    public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	// Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

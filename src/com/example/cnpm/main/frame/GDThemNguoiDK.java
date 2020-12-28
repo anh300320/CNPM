@@ -33,7 +33,7 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
         btnCancel.addActionListener(this);
         btnReset.addActionListener(this);
         nguoiDk=null;
-        this.setTitle("Thêm người đăng kí");
+        this.setTitle("Th\u00EAm kh\u00E1ch h\u00E0ng m\u1EDBi");
     }
 
     /**
@@ -60,26 +60,26 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
         txtCMND = new javax.swing.JTextField();
         txtBatDau = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Thêm mới người đăng kí");
+        jLabel1.setText("TH\u00CAM TH\u00D4NG TIN KH\u00C1CH H\u00C0NG M\u1EDAI");
 
-        jLabel2.setText("Họ và tên :");
+        jLabel2.setText("H\u1ECD v\u00E0 t\u00EAn:");
 
-        jLabel3.setText("Địa chỉ :");
+        jLabel3.setText("\u0110\u1ECBa ch\u1EC9:");
 
-        jLabel4.setText("Số điện thoại :");
+        jLabel4.setText("S\u1ED1 \u0111i\u1EC7n tho\u1EA1i");
 
-        jLabel5.setText("Số CMND :");
+        jLabel5.setText("S\u1ED1 CMND");
 
-        jLabel6.setText("Ngày sinh :");
+        jLabel6.setText("Ng\u00E0y sinh:");
 
-        btnAdd.setText("Add");
+        btnAdd.setText("");
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText("Tho\u00E1t");
 
-        btnReset.setText("Reset");
+        btnReset.setText("Xo\u00E1 h\u1EBFt");
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,10 +90,10 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
       
       
        
-        JLabel lblNewLabel = new JLabel("Giới tính :");
+        JLabel lblNewLabel = new JLabel("Gi\u1EDBi t\u00EDnh:");
         
         comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ "}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "N\u1EEF"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -252,9 +252,9 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
   //          }           
   //          nguoiDk.setMucdich(txtMucdich.getText());
             if( new  DBContext().addNewMem(nguoiDk)){
-                JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
+                JOptionPane.showMessageDialog(rootPane, "Th\u00EAm th\u00E0nh c\u00F4ng!");
             }else
-                JOptionPane.showMessageDialog(rootPane, "Thêm thất bại !");
+                JOptionPane.showMessageDialog(rootPane, "Th\u00EAm th\u1EA5t b\u1EA1i!");
         }catch(Exception e){
             e.printStackTrace();
         }

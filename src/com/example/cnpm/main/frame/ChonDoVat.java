@@ -175,6 +175,11 @@ public class ChonDoVat extends JFrame {
 		btnLuVThot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				thanhTien = 0;
+				for (String[] s: rowVt) {
+					thanhTien+= Integer.parseInt(s[6]);
+				}
+				
 			}
 		});
 		
@@ -199,6 +204,7 @@ public class ChonDoVat extends JFrame {
 	 * Create the frame.
 	 */
 	public ChonDoVat() {
+		setResizable(false);
 		init();
 		onActionListener();
 		
@@ -237,14 +243,20 @@ public class ChonDoVat extends JFrame {
 	
 	public void saveData(int maHoatDong) {
 		mainData.clear();
-		thanhTien = 0;
 		for (String[] s : rowVt) {
 			mainData.add(new ThongTinBanGiaoThue(-1, s[1], Integer.parseInt(s[4]), s[5], "", -1, maHoatDong));
-			thanhTien+= Integer.parseInt(s[6]);
 		}
 		for (ThongTinBanGiaoThue thongtin_bangiao_thue: mainData) {
 			dao.create("thongtin_bangiao_thue", thongtin_bangiao_thue, ThongTinBanGiaoThue.class);
 		}
+	}
+	
+	public Vector<String[]> getDSDoVat() {
+		Vector<String[]> res = new Vector<String[]>();
+		for (String[] s : rowVt) {
+			res.add(new String[] {s[2], s[4]});
+		}
+		return res;
 	}
 	
 	public ArrayList<ThongTinBanGiaoThue>getThongTinBanGiaoThue() {

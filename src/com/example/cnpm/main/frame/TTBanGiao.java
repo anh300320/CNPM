@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 
 public class TTBanGiao extends JFrame {
 	
+	private int maBanGiao;
+	private int maHoatDong;
 	private DAO dao = new DAO();
 	private JPanel contentPane;
 	private JTable table;
@@ -35,10 +37,10 @@ public class TTBanGiao extends JFrame {
 	private void onListener() {
 	}
 	
-	private void onCreate(String mabangiao) {
-		dao.SQL("select d.tenloai, t.* from dovat d, thongtin_bangiao_thue t where d.maloai = t.maloai and t.mabangiao = " + mabangiao);
+	private void onCreate() {
+		if (maBanGiao > 0) dao.SQL("select d.tenloai, t.* from dovat d, thongtin_bangiao_thue t where d.maloai = t.maloai and t.mabangiao = " + maBanGiao);
+		else if (maHoatDong > 0) dao.SQL("select d.tenloai, t.* from dovat d, thongtin_bangiao_thue t where d.maloai = t.maloai and t.mahoatdong = " + maHoatDong);
 		while (dao.next()) {
-			
 			rowVt.add(new String[] {
 				dao.getColumn("tenloai"),
 				dao.getColumn("maloai"),
@@ -51,10 +53,12 @@ public class TTBanGiao extends JFrame {
 		}
 	}
 	
-	public TTBanGiao(String mabangiao) {
+	public TTBanGiao(int maBanGiao, int maHoatDong) {
+		this.maBanGiao = maBanGiao;
+		this.maHoatDong = maHoatDong;
 		setTitle("Danh sách thuê");
 		init();
-		onCreate(mabangiao);
+		onCreate();
 		onListener();
 	}
 	
@@ -75,5 +79,21 @@ public class TTBanGiao extends JFrame {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
+	}
+
+	public int getMaBanGiao() {
+		return maBanGiao;
+	}
+
+	public void setMaBanGiao(int maBanGiao) {
+		this.maBanGiao = maBanGiao;
+	}
+
+	public int getMaHoatDong() {
+		return maHoatDong;
+	}
+
+	public void setMaHoatDong(int maHoatDong) {
+		this.maHoatDong = maHoatDong;
 	}
 }

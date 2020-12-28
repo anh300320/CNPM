@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -78,7 +79,6 @@ public class BaoCaoHoatDong extends JFrame {
 
 		
 		setTitle("B\u00E1o c\u00E1o ho\u1EA1t \u0111\u1ED9ng t\u1ED5 d\u00E2n ph\u1ED1");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 585, 474);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -165,8 +165,7 @@ public class BaoCaoHoatDong extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(tgBatDau.getDatePicker().getDate() == null || tgBatDau.getTimePicker().getTime() == null || tgKetThuc.getDatePicker().getDate() == null || tgKetThuc.getTimePicker().getTime() == null) {
-					JFrame popUp = new PopUp("nhap thoi gian");
-					popUp.setVisible(true);
+					JOptionPane.showMessageDialog(rootPane,"Thời gian không hợp lệ!");
 					return;
 				}
 				
@@ -232,7 +231,7 @@ public class BaoCaoHoatDong extends JFrame {
 	
 	private void initButton() {
 		
-		btnTyChnh = new JButton("Cơ sở vật chất");
+		btnTyChnh = new JButton("Tu\u1EF3 ch\u1EC9nh kh\u00E1ch h\u00E0ng");
 		btnTyChnh.setVisible(false);
 		btnTyChnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -244,7 +243,7 @@ public class BaoCaoHoatDong extends JFrame {
 		btnTyChnh.setBounds(244, 327, 152, 28);
 		contentPane.add(btnTyChnh);
 		
-		btnChonNguoi = new JButton("Chọn người thuê");
+		btnChonNguoi = new JButton("Tu\u1EF3 ch\u1EC9nh b\u00E0n giao");
 		btnChonNguoi.setBounds(406, 327, 153, 28);
 		btnChonNguoi.setVisible(false);
 		contentPane.add(btnChonNguoi);
