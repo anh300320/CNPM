@@ -232,7 +232,7 @@ public class BaoCaoHoatDong extends JFrame {
 	
 	private void initButton() {
 		
-		btnTyChnh = new JButton("Cơ sở vật chất");
+		btnTyChnh = new JButton("Tu\u1EF3 ch\u1EC9nh kh\u00E1ch h\u00E0ng");
 		btnTyChnh.setVisible(false);
 		btnTyChnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -244,7 +244,7 @@ public class BaoCaoHoatDong extends JFrame {
 		btnTyChnh.setBounds(244, 327, 152, 28);
 		contentPane.add(btnTyChnh);
 		
-		btnChonNguoi = new JButton("Chọn người thuê");
+		btnChonNguoi = new JButton("Tu\u1EF3 ch\u1EC9nh b\u00E0n giao");
 		btnChonNguoi.setBounds(406, 327, 153, 28);
 		btnChonNguoi.setVisible(false);
 		contentPane.add(btnChonNguoi);

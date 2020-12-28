@@ -58,26 +58,26 @@ public class GDChinhsuaDK extends javax.swing.JFrame implements ActionListener{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Chỉnh sửa thông tin người đăng kí");
+        jLabel1.setText("CH\u1EC8NH S\u1EECA TH\u00D4NG TIN KH\u00C1CH H\u00C0NG");
 
-        jLabel2.setText("Họ và tên :");
+        jLabel2.setText("H\u1ECD v\u00E0 t\u00EAn:");
 
-        jLabel3.setText("Địa chỉ :");
+        jLabel3.setText("\u0110\u1ECBa ch\u1EC9:");
 
-        jLabel4.setText("Số điện thoại :");
+        jLabel4.setText("S\u0110T:");
 
-        jLabel5.setText("Số CMND :");
+        jLabel5.setText("CMND:");
 
-        jLabel6.setText("Ngày sinh :");
+        jLabel6.setText("Ng\u00E0y sinh:");
 
-        btnSave.setText("Lưu");
+        btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
 
-        btnCancel.setText("Hủy bỏ");
+        btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -90,10 +90,10 @@ public class GDChinhsuaDK extends javax.swing.JFrame implements ActionListener{
             }
         });
 
-        btnMucdich.setText("Giới tính :");
+        btnMucdich.setText("Gi\u1EDBi t\u00EDnh:");
         
         comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "N\u1EEF"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
