@@ -111,7 +111,7 @@ public class LSBanGiao extends JFrame {
 				switch(table.getSelectedColumn()) {
 				case 0: String[] s = rowVt.get(table.getSelectedRow());
 						mabangiao = s[0];
-						TTBanGiao ttBanGiao = new TTBanGiao(mabangiao);
+						TTBanGiao ttBanGiao = new TTBanGiao(Integer.parseInt(mabangiao), -1);
 						ttBanGiao.setVisible(true);
 						break;
 				case 1: 
@@ -145,6 +145,7 @@ public class LSBanGiao extends JFrame {
 		});
 	}
 	public LSBanGiao() {
+		setResizable(false);
 		setTitle("Lịch sử bàn giao");
 		init();
 		onTableCreate();

@@ -74,7 +74,7 @@ public class DBContext {
    return false;
  }
  public boolean updateMem(NguoiDangKi n) {
-	 PreparedStatement statement ;
+	 PreparedStatement statement;
      String dbURL = "jdbc:mysql://localhost/cnpm";
      String username = "root";
      String password = "";
