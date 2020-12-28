@@ -7,19 +7,32 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.example.cnpm.main.dao.DAO;
 import com.example.cnpm.main.frame.BaoCaoHoatDong;
+import com.example.cnpm.main.util.HoatDong;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
-	private JButton btnHotngChung;
-	private JButton btnQunLHng;
+	private JButton btnNewButton_2;
+	private JButton btnNewButton_3;
+	private JButton btnNewButton_4;
+	private JTable table;
+	private JTextField textField;
+	
+	private JScrollPane scrollPane;
 	
 
 	/**
@@ -39,24 +52,6 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void onListener() {
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
-		btnHotngChung.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				BaoCaoHoatDong reportFrame = new BaoCaoHoatDong();
-				reportFrame.setVisible(true);
-			}
-		});
-		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
 	}
 
 	/**
@@ -70,23 +65,53 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		btnNewButton = new JButton("B\u00E0n giao");
-		
-		btnNewButton.setBounds(149, 109, 85, 21);
+		btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(10, 79, 128, 38);
 		contentPane.add(btnNewButton);
 		
-		btnHotngChung = new JButton("B\u00E1o c\u00E1o ho\u1EA1t \u0111\u1ED9ng");
-		btnHotngChung.setBounds(376, 109, 292, 21);
-		contentPane.add(btnHotngChung);
-		
-		btnNewButton_1 = new JButton("\u0110\u0103ng k\u00FD s\u1EED d\u1EE5ng NHV");
-		
-		btnNewButton_1.setBounds(77, 212, 219, 21);
+		btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(10, 128, 128, 38);
 		contentPane.add(btnNewButton_1);
 		
-		btnQunLHng = new JButton("Qu\u1EA3n l\u00FD h\u00E0ng th\u00E1ng");
-		btnQunLHng.setBounds(402, 212, 266, 21);
-		contentPane.add(btnQunLHng);
+		btnNewButton_2 = new JButton("New button");
+		btnNewButton_2.setBounds(10, 177, 128, 38);
+		contentPane.add(btnNewButton_2);
+		
+		btnNewButton_3 = new JButton("New button");
+		btnNewButton_3.setBounds(10, 226, 128, 38);
+		contentPane.add(btnNewButton_3);
+		
+		btnNewButton_4 = new JButton("\u0110\u0103ng xu\u1EA5t");
+		btnNewButton_4.setBounds(639, 11, 89, 41);
+		contentPane.add(btnNewButton_4);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(148, 63, 581, 323);
+		contentPane.add(scrollPane);
+		
+		 String column[] = {"STT", "TÃªn hoáº¡t Ä‘á»™ng", "Thá»�i gian báº¯t Ä‘áº§u", "Thá»�i gian káº¿t thÃºc", "Má»¥c Ä‘Ã­ch"};
+		    Vector<String> col = new Vector<>(Arrays.asList(column));
+		    Vector<HoatDong> data = new Vector<HoatDong>(); 
+		
+		DAO dao = new DAO();
+	    
+	    List<HoatDong> lsHd = dao.getAll("lshoatdong", HoatDong.class);
+	    for(HoatDong hd : lsHd)
+	    	data.add(hd);
+	    contentPane.setLayout(null);
+	    
+	    table = new JTable(data, col);
+		scrollPane.setViewportView(table);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setBounds(456, 12, 173, 40);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		
 		onListener();
 	}

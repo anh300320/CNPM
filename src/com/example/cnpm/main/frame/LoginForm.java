@@ -123,14 +123,14 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //Thông báo nếu Username trống
+        //ThÃ´ng bÃ¡o náº¿u Username trá»‘ng
         if(jTextField1.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Vui lòng điền Username!");
+            JOptionPane.showMessageDialog(this, "Vui lÃ²ng Ä‘iá»�n Username!");
         }
         
-        //Thông báo nếu Password trống
+        //ThÃ´ng bÃ¡o náº¿u Password trá»‘ng
         else if(jPasswordField1.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Vui lòng điền Password!");
+            JOptionPane.showMessageDialog(this, "Vui lÃ²ng Ä‘iá»�n Password!");
         }
         else {
             try{
@@ -142,13 +142,13 @@ public class LoginForm extends javax.swing.JFrame {
                 
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+                    JOptionPane.showMessageDialog(this, "Ä�Äƒng nháº­p thÃ nh cÃ´ng!");
                     MenuForm menu = new MenuForm();
                     menu.setVisible(true);
                     setVisible(false);
                 }
                 else{
-                    JOptionPane.showMessageDialog(this, "Đăng nhập thất bại!");
+                    JOptionPane.showMessageDialog(this, "Ä�Äƒng nháº­p tháº¥t báº¡i!");
                 }
             }catch(Exception e){
                 System.out.println(e);
@@ -187,7 +187,8 @@ public class LoginForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                LoginForm login = new LoginForm();
+                login.setVisible(true);
             }
         });
     }

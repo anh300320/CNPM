@@ -63,7 +63,7 @@ public class LichSuHoatDong extends JFrame
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     
-    String column[] = {"STT", "Tên hoạt động", "Thời gian bắt đầu", "Thời gian kết thúc", "Mục đích"};
+    String column[] = {"STT", "TÃªn hoáº¡t Ä‘á»™ng", "Thá»�i gian báº¯t Ä‘áº§u", "Thá»�i gian káº¿t thÃºc", "Má»¥c Ä‘Ã­ch"};
     Vector<String> col = new Vector<>(Arrays.asList(column));
     Vector<HoatDong> data = new Vector<HoatDong>(); 
     
@@ -84,7 +84,7 @@ public class LichSuHoatDong extends JFrame
     txtQunLLch.setFont(new Font("Tahoma", Font.PLAIN, 12));
     txtQunLLch.setBorder(null);
     txtQunLLch.setBackground(SystemColor.menu);
-    txtQunLLch.setText("QUẢN LÝ LỊCH SỬ HOẠT ĐỘNG");
+    txtQunLLch.setText("QUáº¢N LÃ� Lá»ŠCH Sá»¬ HOáº T Ä�á»˜NG");
     txtQunLLch.setBounds(232, 23, 225, 28);
     contentPane.add(txtQunLLch);
     txtQunLLch.setColumns(10);

@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class DBContext {
         
     public static ArrayList<NguoiDangKi> selectQuery(){
-        String dbURL = "jdbc:mysql://localhost/cnpm_sql";
+        String dbURL = "jdbc:mysql://localhost/cnpm";
         String username = "root";
         String password = "";
         ArrayList<NguoiDangKi> list = new ArrayList<>();
@@ -48,7 +48,7 @@ public class DBContext {
  public  boolean addNewMem(NguoiDangKi n){
   
       PreparedStatement statement ;
-      String dbURL = "jdbc:mysql://localhost/cnpm_sql";
+      String dbURL = "jdbc:mysql://localhost/cnpm";
       String username = "root";
       String password = "";
      //String connectionUrl = "jdbc:sqlserver://localhost;databaseName=DKsudung;user=sa;password=123456";
@@ -75,7 +75,7 @@ public class DBContext {
  }
  public boolean updateMem(NguoiDangKi n) {
 	 PreparedStatement statement ;
-     String dbURL = "jdbc:mysql://localhost/cnpm_sql";
+     String dbURL = "jdbc:mysql://localhost/cnpm";
      String username = "root";
      String password = "";
     //String connectionUrl = "jdbc:sqlserver://localhost;databaseName=DKsudung;user=sa;password=123456";
@@ -103,7 +103,7 @@ public class DBContext {
    public  static void delete(String cmnd){
   
       PreparedStatement statement ;
-      String dbURL = "jdbc:mysql://localhost/cnpm_sql";
+      String dbURL = "jdbc:mysql://localhost/cnpm";
       String username = "root";
       String password = "";
   //   String connectionUrl = "jdbc:sqlserver://localhost;databaseName=DKsudung;user=sa;password=123456";
@@ -120,7 +120,7 @@ public class DBContext {
     public static ArrayList<NguoiDangKi> findByname(String HoTen){
         
         ArrayList<NguoiDangKi> list = new ArrayList<>();
-        String dbURL = "jdbc:mysql://localhost/cnpm_sql";
+        String dbURL = "jdbc:mysql://localhost/cnpm";
         String username = "root";
         String password = "";
         String sql = "SELECT * FROM tt_canhan where hoten like ?";

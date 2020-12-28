@@ -16,7 +16,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Date;
 import java.awt.event.*;
-import com.toedter.calendar.JDateChooser;
 
 public class Ban_giao extends javax.swing.JFrame {
 	private DefaultTableModel model;
@@ -77,7 +76,6 @@ public class Ban_giao extends javax.swing.JFrame {
                 dispose();
                 MenuForm newform = new MenuForm();
                 newform.setVisible(true);
-                           
             }
         });
     }
@@ -577,7 +575,8 @@ public class Ban_giao extends javax.swing.JFrame {
                 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-       
+            	Ban_giao bangiao = new Ban_giao();
+            	bangiao.setVisible(true);
             }
         });
     }
