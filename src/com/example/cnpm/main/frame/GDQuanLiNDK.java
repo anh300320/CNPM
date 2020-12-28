@@ -64,7 +64,7 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
         jTable1 = new javax.swing.JTable();
         btnHome = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnThem.setText("N\u1EEF");
         btnThem.addActionListener(new java.awt.event.ActionListener() {

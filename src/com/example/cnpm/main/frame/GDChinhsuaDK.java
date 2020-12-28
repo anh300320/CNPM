@@ -55,7 +55,7 @@ public class GDChinhsuaDK extends javax.swing.JFrame implements ActionListener{
         txtBatDau = new javax.swing.JTextField();
         btnMucdich = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("CH\u1EC8NH S\u1EECA TH\u00D4NG TIN KH\u00C1CH H\u00C0NG");

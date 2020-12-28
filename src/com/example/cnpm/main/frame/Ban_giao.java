@@ -67,15 +67,13 @@ public class Ban_giao extends javax.swing.JFrame {
     public Ban_giao() {
         initComponents();
         loadDataIntoTable(); 
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 setVisible(false);
                 dispose();
-                MenuForm newform = new MenuForm();
-                newform.setVisible(true);
             }
         });
     }
@@ -110,7 +108,7 @@ public class Ban_giao extends javax.swing.JFrame {
     private List<quan_ly> getDataFromDB(){
         List<quan_ly> list = new ArrayList<quan_ly>();
         try{
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysqldb", "root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cnpm", "root", "");
             String sql = "SELECT ID, maloai, SL_thang_nay, SL_thang_truoc, Ngay_kiem_tra, Hien_trang FROM quan_ly_hang_thang";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -431,7 +429,7 @@ public class Ban_giao extends javax.swing.JFrame {
         String sql = "INSERT INTO quan_ly_hang_thang(maloai, SL_thang_nay, SL_thang_truoc, Ngay_kiem_tra, Hien_trang) VALUES (?, ?, ?, ?, ?)";
         
         try{
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysqldb", "root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cnpm", "root", "");
             
             PreparedStatement pst = conn.prepareStatement(sql);
             

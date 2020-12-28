@@ -60,7 +60,7 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
         txtCMND = new javax.swing.JTextField();
         txtBatDau = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("TH\u00CAM TH\u00D4NG TIN KH\u00C1CH H\u00C0NG M\u1EDAI");

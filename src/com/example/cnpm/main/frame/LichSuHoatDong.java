@@ -129,7 +129,7 @@ public class LichSuHoatDong extends JFrame
 					ttBanGiao.setVisible(true);
 					break;
 				case 1: 
-					; break;
+					break;
 				}
 			}	
 		}
@@ -172,7 +172,7 @@ public class LichSuHoatDong extends JFrame
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     
-    String column[] = {"STT", "TÃªn hoáº¡t Ä‘á»™ng", "Thá»�i gian báº¯t Ä‘áº§u", "Thá»�i gian káº¿t thÃºc", "Má»¥c Ä‘Ã­ch"};
+    String column[] = {"STT", "Tên Hoạt Động", "Thá»�i gian báº¯t Ä‘áº§u", "Thá»�i gian káº¿t thÃºc", "Má»¥c Ä‘Ã­ch"};
     Vector<String> col = new Vector<>(Arrays.asList(column));
     data = new Vector<HoatDong>(); 
     
@@ -226,7 +226,7 @@ public class LichSuHoatDong extends JFrame
     contentPane.add(sp);
     
     JTextField txtQunLLch = new JTextField();
-    txtQunLLch.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    txtQunLLch.setFont(new Font("Tahoma", Font.PLAIN, 13));
     txtQunLLch.setBorder(null);
     txtQunLLch.setBackground(SystemColor.menu);
 
