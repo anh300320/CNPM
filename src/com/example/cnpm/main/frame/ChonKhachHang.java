@@ -6,24 +6,36 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+
+import com.example.cnpm.main.dao.DAO;
+import com.example.cnpm.main.util.TtCaNhan;
+
 import javax.swing.JEditorPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class ChonKhachHang extends JFrame {
-
-	String cmnd;
 	
 	private JPanel contentPane;
 	private JTextField txtTn;
-	private JTextField txtCmnd;
-	private JEditorPane editorPane_1;
 	
-	String getCmnd() {
-		return cmnd;
-	}
+	private int cmnd;
+	
+	private List<TtCaNhan> listNguoiDangKi;
+	private JButton btnNewButton_1;
+	private JEditorPane editorPane;
+	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -45,40 +57,103 @@ public class ChonKhachHang extends JFrame {
 	 * Create the frame.
 	 */
 	public ChonKhachHang() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	  
+		listNguoiDangKi = new ArrayList<>();
+	  
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(227, 56, 107, 19);
+		editorPane = new JEditorPane();
+		editorPane.setBounds(69, 11, 263, 19);
 		contentPane.add(editorPane);
 		
-		editorPane_1 = new JEditorPane();
-		editorPane_1.setBounds(227, 110, 107, 19);
-		contentPane.add(editorPane_1);
-		
 		txtTn = new JTextField();
-		txtTn.setText("T\u00EAn");
-		txtTn.setBounds(53, 56, 96, 19);
+		txtTn.setEditable(false);
+		txtTn.setText("Họ tên");
+		txtTn.setBounds(10, 11, 49, 19);
 		contentPane.add(txtTn);
 		txtTn.setColumns(10);
-		
-		txtCmnd = new JTextField();
-		txtCmnd.setText("CMND");
-		txtCmnd.setColumns(10);
-		txtCmnd.setBounds(53, 110, 96, 19);
-		contentPane.add(txtCmnd);
 		
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cmnd = editorPane.getText();
+				int rowId = table.getSelectedRow();
+				setCmnd(listNguoiDangKi.get(rowId).getCmnd());
+				setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(144, 189, 85, 21);
+		btnNewButton.setBounds(339, 229, 85, 21);
 		contentPane.add(btnNewButton);
+		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		DAO dao = new DAO();
+		listNguoiDangKi = dao.getAll("tt_canhan", TtCaNhan.class);
+		
+		initTable();
+		
 	}
+
+	public int getCmnd() {
+		return cmnd;
+	}
+
+	public void setCmnd(int cmnd) {
+		this.cmnd = cmnd;
+	}
+	
+	void initTable() {
+		
+		initTable(listNguoiDangKi);
+		
+		btnNewButton_1 = new JButton("Tìm kiếm");
+		btnNewButton_1.setBounds(342, 11, 82, 23);
+		contentPane.add(btnNewButton_1);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 35, 414, 191);
+		contentPane.add(scrollPane);
+
+		scrollPane.setViewportView(table);
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String tenTimKiem = editorPane.getText();
+				List<TtCaNhan> list = new ArrayList<TtCaNhan>();
+				
+				for(TtCaNhan tt : listNguoiDangKi) {
+					String ten = tt.getHoTen();
+					if(ten.toLowerCase().contains(tenTimKiem.toLowerCase().trim())) list.add(tt);
+				}
+				
+				initTable(list);
+			}
+		});
+	}
+	
+	void initTable(List<TtCaNhan> listCaNhan) {
+		String column[] = {"Số CMND", "Họ tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Địa chỉ"};
+	    Vector<String> col = new Vector<>(Arrays.asList(column));
+		Vector<Vector<String>> data = new Vector<Vector<String>>();
+		for(TtCaNhan tt : listCaNhan) {
+			Vector<String> vt = new Vector<String>();
+			vt.add(String.valueOf(tt.getCmnd()));
+			vt.add(tt.getHoTen());
+			vt.add(tt.getNgaySinh());
+			vt.add(tt.getGioiTinh());
+			vt.add(tt.getSdt());
+			vt.add(tt.getDiaChi());
+			data.add(vt);
+		}
+		
+		table = new JTable(data, col);
+	}
+	
 }

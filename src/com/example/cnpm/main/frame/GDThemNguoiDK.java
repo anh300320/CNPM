@@ -33,7 +33,7 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
         btnCancel.addActionListener(this);
         btnReset.addActionListener(this);
         nguoiDk=null;
-        this.setTitle("Thêm người đăng ký");
+        this.setTitle("Thêm người đăng kí");
     }
 
     /**
@@ -67,13 +67,13 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
 
         jLabel2.setText("Họ và tên :");
 
-        jLabel3.setText("Địa chỉ:");
+        jLabel3.setText("Địa chỉ :");
 
         jLabel4.setText("Số điện thoại :");
 
         jLabel5.setText("Số CMND :");
 
-        jLabel6.setText("Ngày sinh:");
+        jLabel6.setText("Ngày sinh :");
 
         btnAdd.setText("Add");
 
@@ -93,7 +93,7 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
         JLabel lblNewLabel = new JLabel("Giới tính :");
         
         comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ ", "Khác"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ "}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -252,15 +252,15 @@ public class GDThemNguoiDK extends JFrame implements ActionListener{
   //          }           
   //          nguoiDk.setMucdich(txtMucdich.getText());
             if( new  DBContext().addNewMem(nguoiDk)){
-                JOptionPane.showMessageDialog(rootPane, "Thêm thành công!");
+                JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
             }else
-                JOptionPane.showMessageDialog(rootPane, "Thêm thất bại!");
+                JOptionPane.showMessageDialog(rootPane, "Thêm thất bại !");
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     public void btnCancelClick(){
-        new GDQuanLiNDK().setVisible(true);
+        new GDQuanLiNDK(0).setVisible(true);
         this.dispose();
     }
     public void btnResetClick(){

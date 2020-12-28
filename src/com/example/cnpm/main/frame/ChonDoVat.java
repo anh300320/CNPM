@@ -28,6 +28,7 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 
 import com.example.cnpm.main.dao.DAO;
+import com.example.cnpm.main.util.DoVat;
 import com.example.cnpm.main.util.HoatDong;
 import com.example.cnpm.main.util.ThongTinBanGiaoThue;
 
@@ -53,7 +54,7 @@ public class ChonDoVat extends JFrame {
 			new String[] {
 				"STT", 
 				"M\u00E3 lo\u1EA1i", "T\u00EAn lo\u1EA1i", "\u0110\u01A1n v\u1ECB",
-				"S\u1ED1 l\u01B0\u1EE3ng", " Hi\u1EC7n tr\u1EA1ng", "Thành tiền"
+				"S\u1ED1 l\u01B0\u1EE3ng", " Hi\u1EC7n tr\u1EA1ng", "ThÃ nh tiá»�n"
 			}
 		);
 	
@@ -69,6 +70,8 @@ public class ChonDoVat extends JFrame {
 	private JEditorPane editorPane_3;
 	private JLabel newLabel;
 	private JButton btnLuVThot;
+	
+	List<DoVat> listDoVat;
 
 	/**
 	 * Launch the application.
@@ -105,7 +108,7 @@ public class ChonDoVat extends JFrame {
 			}
 		});
 		
-		button.addActionListener(new ActionListener() {							// Nút thêm 
+		button.addActionListener(new ActionListener() {							// NÃºt thÃªm 
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -269,6 +272,7 @@ public class ChonDoVat extends JFrame {
 		loaiVt = new Vector<String>();
 		setTitle("Ch\u1ECDn \u0111\u1ED3 v\u1EADt");
 		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 802, 699);
 		contentPane = new JPanel();

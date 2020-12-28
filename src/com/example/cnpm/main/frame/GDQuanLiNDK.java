@@ -10,6 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import com.example.cnpm.main.util.NguoiDangKi;
+import java.awt.Font;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
 
 /**
  *
@@ -21,7 +26,7 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
        /**
      * Creates new form GDQuanLiNDK */
        private int selectIndex1;
-    public GDQuanLiNDK() {
+    public GDQuanLiNDK(int mode) {
         initComponents();
         btnChinhsua.addActionListener(this);
         btnFind.addActionListener(this);
@@ -30,7 +35,9 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
         tableModel = (DefaultTableModel) jTable1.getModel();
         showMem();
         setLocationRelativeTo(null);
-        this.setTitle("Giao diện chính ");
+        this.setTitle("Giao diá»‡n quáº£n lÃ­ thÃ´ng tin cÃ¡ nhÃ¢n ");
+        
+        checkMode(mode);
     }
     private void showMem(){
        
@@ -49,8 +56,6 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
-        jLabel1 = new javax.swing.JLabel();
         btnThem = new javax.swing.JButton();
         btnChinhsua = new javax.swing.JButton();
         btnFind = new javax.swing.JButton();
@@ -61,32 +66,28 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("VNI-Lithos", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel1.setText("QUaûn Lí Ñaêng Kí Söû Duïng Nhaø Vaên Hoùa");
-
-        btnThem.setText("Thêm");
+        btnThem.setText("ThÃªm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnChinhsua.setText("Chỉnh sửa");
+        btnChinhsua.setText("Chá»‰nh sá»­a");
         btnChinhsua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChinhsuaActionPerformed(evt);
             }
         });
 
-        btnFind.setText("Tìm kiếm");
+        btnFind.setText("TÃ¬m kiáº¿m");
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFindActionPerformed(evt);
             }
         });
 
-        btnHuydk.setText("Hủy đăng kí");
+        btnHuydk.setText("Há»§y Ä�K");
         btnHuydk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuydkActionPerformed(evt);
@@ -101,58 +102,59 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Họ và tên", "Địa chỉ", "SĐT", "CMND", "Ngày sinh", "Giới tính"
+                "Há»� vÃ  tÃªn","Ä�á»‹a chá»‰", "SÄ�T", "CMND", "NgÃ y sinh","Giá»›i tÃ­nh"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnHome.setText("Trang chính");
+        btnHome.setText("Trang chÃ­nh");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
             }
         });
+        
+        JLabel lblNewLabel = new JLabel("Qu\u1EA3n L\u00ED th\u00F4ng tin c\u00E1 nh\u00E2n ng\u01B0\u1EDDi \u0111\u0103ng k\u00ED");
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnChinhsua)
-                        .addGap(77, 77, 77)
-                        .addComponent(btnHome)
-                        .addGap(81, 81, 81)
-                        .addComponent(btnFind)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(btnHuydk)
-                .addGap(49, 49, 49))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(34)
+        			.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+        			.addGap(72)
+        			.addComponent(btnChinhsua)
+        			.addGap(134)
+        			.addComponent(btnHome)
+        			.addPreferredGap(ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+        			.addComponent(btnHuydk)
+        			.addGap(115)
+        			.addComponent(btnFind)
+        			.addGap(60))
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(301)
+        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 331, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(306, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem)
-                    .addComponent(btnChinhsua)
-                    .addComponent(btnFind)
-                    .addComponent(btnHuydk)
-                    .addComponent(btnHome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        			.addGap(26)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnThem)
+        				.addComponent(btnChinhsua)
+        				.addComponent(btnFind)
+        				.addComponent(btnHuydk)
+        				.addComponent(btnHome))
+        			.addPreferredGap(ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>                        
@@ -167,7 +169,7 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
             JOptionPane.showMessageDialog(rootPane,"Please choose a line!");
            }
            else if(NList.size()==0){
-                JOptionPane.showMessageDialog(rootPane,"Không có thông tin!");
+                JOptionPane.showMessageDialog(rootPane,"KhÃ´ng cÃ³ thÃ´ng tin !");
            } else{
                 int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete this item?");
                 if(selectedindex >=0){
@@ -186,20 +188,20 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
         // TODO add your handling code here:
             /*  int select = jTable1.getSelectedRow();
             if (select == -1) {
-                JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa: ");
+                JOptionPane.showMessageDialog(rootPane, "Xin vui lÃƒÂ²ng chÃ¡Â»ï¿½n dÃƒÂ²ng cÃ¡ÂºÂ§n sÃ¡Â»Â­a: ");
             } else {
                  NguoiDangKi ndk= NList.get(select);
                DBContext.UpdateMem(ndk);
                 jTable1.setModel(tableModel);
-              JOptionPane.showMessageDialog(rootPane, "Cập nhật xong");
+              JOptionPane.showMessageDialog(rootPane, "CÃ¡ÂºÂ­p nhÃ¡ÂºÂ­t xong");
             }
         */
             selectIndex1 =jTable1.getSelectedRow();
             if(NList.size()==0){
-                JOptionPane.showMessageDialog(rootPane, "Không có thông tin! Vui lòng thêm thông tin!");
+                JOptionPane.showMessageDialog(rootPane, "KhÃ´ng cÃ³ thÃ´ng tin! Vui lÃ²ng thÃªm thÃ´ng tin!");
             }
             else if(selectIndex1 == -1){
-                 JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa: ");
+                 JOptionPane.showMessageDialog(rootPane, "Xin vui lÃ²ng chá»�n dÃ²ng cáº§n sá»­a: ");
             } else{ 
                 if(selectIndex1 >=0){
                     NguoiDangKi ndk= NList.get(selectIndex1);
@@ -257,7 +259,7 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GDQuanLiNDK().setVisible(true);
+                new GDQuanLiNDK(0).setVisible(true);
             }
         });
     }
@@ -268,7 +270,6 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnHuydk;
     private javax.swing.JButton btnThem;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration                   
@@ -291,6 +292,13 @@ public class GDQuanLiNDK extends javax.swing.JFrame  implements ActionListener{
   
     public void btnChinhsuaClick(){
         this.dispose();
+    }
+    
+    private void checkMode(int mode) {
+    	if(mode == 0) return;
+    	btnChinhsua.setVisible(false);
+    	btnHome.setVisible(false);
+    	btnHuydk.setVisible(false);
     }
 }
 
